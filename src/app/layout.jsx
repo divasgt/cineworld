@@ -15,12 +15,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
   <html lang="en" className={inter.className}>
-    <body className={`${inter.className} flex flex-col min-h-screen bg-black text-white relative`}>
+    <body className={`${inter.className} flex flex-col min-h-screen bg-black text-white`}>
       <Header />
 
-      <div className="grow pt-24">
+      <main className="grow pt-15">
       {children}
-      </div>
+      </main>
 
       <Footer />
     </body>
