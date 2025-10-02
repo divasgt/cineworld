@@ -1,9 +1,7 @@
 'use client';
 import "@/styles/MediaCard.css";
 import { useRouter } from "next/navigation";
-
-const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/';
-const PLACEHOLDER_IMAGE_URL = (width, height) => `https://placehold.co/${width}x${height}/374151/FFFFFF?text=No+Image`;
+import { IMAGE_BASE_URL, PLACEHOLDER_IMAGE_URL } from "@/utils/constants";
 
 export default function MediaCard({item, isMovie, layoutType}) {
   const router = useRouter();

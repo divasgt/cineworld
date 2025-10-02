@@ -12,8 +12,7 @@ export async function GET(
 
   let type = "homePage";
   if (param0==="home") type="homePage";
-  else if (param0==="movie") type="moviePage";
-  else if (param0==="tv") type = "tvPage";
+  else if (param0==="details") type="detailsPage";
 
   try {
     const data = await fetchFromTmdb(endpoint, type);
