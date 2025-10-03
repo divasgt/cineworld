@@ -5,6 +5,7 @@ import "@/styles/details.css";
 import TrailerBtn from "@/components/media-details-page/TrailerBtn";
 import WatchlistBtn from "@/components/media-details-page/WatchlistBtn";
 import AskAIBtn from "@/components/media-details-page/AskAIBtn";
+import { notFound } from "next/navigation";
 
 function getAgeRating(detailsData, type) {
   if (type==="movie" && detailsData.release_dates) {
@@ -26,11 +27,13 @@ function getAgeRating(detailsData, type) {
 
 export default async function MediaDetailsContainer({type, id}) {
   // Fetch data directly instead of calling the API route
-  const detailsData = await fetchFromTmdb(`/${type}/${id}`, "detailsPage").catch(err => {
-    console.error("Error fetching media data: ", err)
-    // Return an empty object or handle the error as needed
-    return {}
-  })
+  let detailsData
+  try {
+    detailsData = await fetchFromTmdb(`/${type}/${id}`, "detailsPage")
+  } catch (err) {
+    if (err.message.includes('404')) notFound()
+    throw err // For other errors, the nearest error.jsx page will be shown
+  }
   
   const releaseYear = (detailsData.release_date || detailsData.first_air_date || '').slice(0, 4)
   const ageRating = getAgeRating(detailsData, type)
