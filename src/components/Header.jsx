@@ -8,7 +8,7 @@ export default function Header() {
 
     <div className="header-left shrink-0">
       <nav className="nav-links flex gap-5 items-center shrink-0">
-        <Link href="/" className="logo text-red-600 text-xl font-bold mr-2 transition">CineVerse</Link>
+        <Link href="/" className="logo text-red-600 text-2xl tracking-tighter font-bold mr-2 transition">CineWorld</Link>
         <Link href="/#intro-section" className="hover:text-white transition">Home</Link>
         <Link href="/#latest-movies" className="hover:text-white transition">Movies</Link>
         <Link href="/#latest-tv-shows" className="hover:text-white transition">TV Shows</Link>
