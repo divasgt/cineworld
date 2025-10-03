@@ -4,7 +4,7 @@ import HeaderButton from "./HeaderButton";
 
 export default function Header() {
   return (
-  <header className="header bg-gray-900 text-gray-400 font-medium flex fixed top-0 w-screen items-center px-9 py-3.5 justify-between z-1000">
+  <header className="header bg-gray-900/30 backdrop-blur-sm text-gray-400 font-medium flex fixed top-0 w-screen items-center px-9 py-3.5 justify-between z-1000">
 
     <div className="header-left shrink-0">
       <nav className="nav-links flex gap-5 items-center shrink-0">
