@@ -43,15 +43,32 @@ export default async function MediaDetailsContainer({type, id}) {
   const typeLabel = type === 'movie' ? 'Movie' : 'TV Show'  
   
   return (
-  <div id="detailsContainer" className="details-container py-10 px-24">
+  <>
+  {detailsData.backdrop_path ? 
+    <div className="fixed z-[-1] top-0 right-0 bottom-0 left-0">
+      <Image
+        className="w-full h-full object-cover scale-110"
+        src={`${IMAGE_BASE_URL}w1280${detailsData.backdrop_path}`}
+        alt="Backdrop Image"
+        width={1280}
+        height={720}
+        priority
+      />
+      <div className="absolute inset-0 bg-black/70"></div>
+    </div>
+    :
+    ""
+  }
+  
+  <div id="detailsContainer" className="details-container relative py-10 px-24 z-0">
       
     {/* <div className="w-full p-20 pt-[100px] rounded-lg animate-pulse flex items-center justify-center text-lg">
       Loading...
     </div> */}
-    
+
     <div className="poster">
       <Image
-        className="w-full h-auto block"
+        // className="w-full h-full object-cover block"
         src={detailsData.poster_path ?
           `${IMAGE_BASE_URL}w342${detailsData.poster_path}` :
           PLACEHOLDER_IMAGE_URL(300, 450)}
@@ -67,15 +84,15 @@ export default async function MediaDetailsContainer({type, id}) {
       <p className="meta-inline">
         <span className="type">{typeLabel}</span> • 
         <span className="length">{lengthOrSeasons}</span> • 
-        <span className="age-rating">{ageRating}</span>
+        <span className="age-rating">{ageRating}</span> • 
+        <span className="genres">{detailsData.genres?.map(g => (
+          <span className="genre-badge" key={g.id}>{g.name}</span>
+        ))}</span>
       </p>
-      <div className="genres">{detailsData.genres?.map(g => (
-        <span className="genre-badge" key={g.id}>{g.name}</span>
-      ))}</div>
       <div className="star-rating">
         <span className="star">★</span>
         <span className="rating-value">{detailsData.vote_average.toFixed(1)}</span>
-        <span className="out-of-10">/ 10</span>
+        {/* <span className="out-of-10">/ 10</span> */}
         <span className="total-votes">({detailsData.vote_count.toLocaleString()})</span>
       </div>
 
@@ -97,5 +114,6 @@ export default async function MediaDetailsContainer({type, id}) {
 
     {/* <p>{JSON.stringify(detailsData)}</p> */}
   </div>
+  </>
   )
 }

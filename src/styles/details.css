@@ -23,6 +23,7 @@ body {
 
 .details-container {
   display: flex;
+  align-items: start;
   flex-wrap: wrap;
   gap: 2rem;
 }
@@ -34,11 +35,11 @@ body {
   box-shadow: 0 4px 6px rgba(0,0,0,0.5);
 }
 
-.poster Image {
+/* .poster Image {
   width: 100%;
   height: auto;
   display: block;
-}
+} */
 
 .info {
   padding: 0px 0 0 10px;
