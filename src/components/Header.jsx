@@ -27,7 +27,8 @@ export default function Header() {
       </Link>
 
       <Link href="/cinema-ai">
-        <HeaderButton className="bg-blue-600 hover:bg-blue-500">Ask AI</HeaderButton>
+        <HeaderButton className="bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-300 
+  transform hover:scale-105">Ask AI</HeaderButton>
       </Link>
 
       <Link href="/watchlist">
