@@ -8,6 +8,7 @@ import { notFound } from "next/navigation";
 import { MdCalendarMonth } from 'react-icons/md';
 import { HiClock } from 'react-icons/hi2';
 import { MdStar } from 'react-icons/md';
+import WatchProviders from "./WatchProviders";
 
 function getAgeRating(detailsData, type) {
   if (type==="movie" && detailsData.release_dates) {
@@ -110,9 +111,7 @@ export default async function MediaDetailsContainer({type, id}) {
           <AskAIBtn />
         </div>
 
-        <div className="text-xl font-semibold  text-white">Watch Now
-          {/* Todo */}
-        </div>
+        <WatchProviders detailsData={detailsData}/>
 
         {detailsData.tagline ? <p className="italic text-gray-300 mt-4">"{detailsData.tagline}"</p> : null}
         {/* <h2 className="text-2xl font-semibold mt-4 text-white">Overview</h2> */}
