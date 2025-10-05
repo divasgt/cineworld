@@ -29,7 +29,6 @@ function getAgeRating(detailsData, type) {
 }
 
 export default async function MediaDetailsContainer({type, id}) {
-  // Fetch data directly instead of calling the API route
   let detailsData
   try {
     detailsData = await fetchFromTmdb(`/${type}/${id}`, "detailsPage")
@@ -62,9 +61,9 @@ export default async function MediaDetailsContainer({type, id}) {
       : ""
     }
 
-    <div id="detailsContainer" className="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-10 relative py-10 px-12 md:px-24 z-0 text-gray-300">
+    <div id="detailsContainer" className="grid grid-cols-1 md:grid-cols-[350px_1fr] gap-10 relative py-10 px-12 md:px-24 z-0 text-gray-300">
 
-      <div className="rounded-lg overflow-hidden shadow-lg self-start max-w-[300px]">
+      <div className="rounded-lg overflow-hidden shadow-lg self-start md:max-w-full max-w-[300px]">
         <Image
           className="w-full h-full object-cover"
           src={detailsData.poster_path ?
@@ -79,17 +78,17 @@ export default async function MediaDetailsContainer({type, id}) {
 
       <div className="flex flex-col gap-5 self-start">
 
-        <h1 className="text-5xl font-bold text-white leading-tight ml-[-3px]">{detailsData.name || detailsData.title} ({releaseYear})</h1>
+        <h1 className="text-[48px] font-bold text-white leading-tight ml-[-3px]">{detailsData.name || detailsData.title} ({releaseYear})</h1>
 
         {/* <div className="flex gap-10 text-gray-400 flex-wrap"> */}
           <div className="flex items-center gap-4 text-gray-400 font-medium flex-wrap mb-2">
-            <span className="text-red-600">{typeLabel}</span> • 
-            <span>{lengthOrSeasons}</span> • 
-            <span className="border border-gray-400 rounded px-2 py-0.5 text-sm">{ageRating}</span> • 
+            <span className="text-red-600 mr-4">{typeLabel}</span>
             <span className="flex gap-2 items-center">
-              <MdStar className="text-amber-500 text-2xl" />
-              <span className="text-md mb-[-1] tracking-wide">{detailsData.vote_average.toFixed(1)}</span>
-            </span>
+              <MdStar className="text-amber-500 text-2xl mb-0.5" />
+              <span className="text-md  tracking-wide">{detailsData.vote_average.toFixed(1)}</span>
+            </span> • 
+            <span>{lengthOrSeasons}</span> • 
+            <span className="border border-gray-400 rounded px-2 py-0.5 text-sm">{ageRating}</span>
           </div>
 
           <div className="flex flex-wrap gap-2 items-center mb-2">
@@ -105,7 +104,7 @@ export default async function MediaDetailsContainer({type, id}) {
           {/* <span className="text-sm text-gray-500">({detailsData.vote_count.toLocaleString()} votes)</span> */}
         {/* </div> */}
 
-        <div className="flex gap-4 flex-wrap my-4">
+        <div className="flex gap-4 flex-wrap mt-4 mb-3">
           <TrailerBtn />
           <WatchlistBtn />
           <AskAIBtn />
@@ -113,7 +112,7 @@ export default async function MediaDetailsContainer({type, id}) {
 
         <WatchProviders detailsData={detailsData}/>
 
-        {detailsData.tagline ? <p className="italic text-gray-300 mt-4">"{detailsData.tagline}"</p> : null}
+        {detailsData.tagline ? <p className="italic text-gray-300 mt-8">"{detailsData.tagline}"</p> : null}
         {/* <h2 className="text-2xl font-semibold mt-4 text-white">Overview</h2> */}
         <p className="max-w-3xl">{detailsData.overview}</p>
 
