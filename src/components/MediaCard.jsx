@@ -1,12 +1,9 @@
-'use client';
-import { useRouter } from "next/navigation";
 import { IMAGE_BASE_URL, PLACEHOLDER_IMAGE_URL } from "@/utils/constants";
 import Image from "next/image";
 import { twMerge } from "tailwind-merge";
+import Link from "next/link";
 
 export default function MediaCard({item, isMovie, layoutType}) {
-  const router = useRouter();
-  
   const title = isMovie ? item.title : item.name;
   const releaseDate = isMovie ? item.release_date : item.first_air_date;
   const year = releaseDate ? new Date(releaseDate).getFullYear() : 'N/A';
@@ -17,18 +14,15 @@ export default function MediaCard({item, isMovie, layoutType}) {
   const placeholderHeight = placeholderWidth * 1.5; // Maintain 2:3 ratio
   const posterPath = item.poster_path ? `${IMAGE_BASE_URL}w342${item.poster_path}` : PLACEHOLDER_IMAGE_URL(placeholderWidth, placeholderHeight);
 
-
-  function handleCardClick() {
-    console.log(`Clicked on ${isMovie ? 'Movie' : 'TV Show'} ID: ${item.id}`);
-    router.push(`/${isMovie ? 'movie' : 'tv'}/${item.id}`);
-  }
+  const linkPath = `/${isMovie ? 'movie' : 'tv'}/${item.id}`;
 
   return (
-  <div className={twMerge(
+  <Link
+    href={linkPath}
+    className={twMerge(
       'rounded-lg overflow-hidden bg-gray-600/20 transition-transform duration-300 ease-in-out cursor-pointer hover:scale-105 hover:shadow-lg hover:shadow-black/40 backdrop-blur-xl shadow',
       layoutType === 'horizontal' && 'shrink-0 w-[200px]'
     )}
-    onClick={handleCardClick}
   >
     <Image
       src={posterPath}
@@ -37,18 +31,19 @@ export default function MediaCard({item, isMovie, layoutType}) {
       height={342}
       width={342}
       unoptimized={!item.poster_path}
-      // onError={this.src=PLACEHOLDER_IMAGE_URL(placeholderWidth, placeholderHeight)}
     />
+
     <div className="p-3">
       <h3 className="font-semibold text-sm overflow" title={title}>{title}</h3>
+
       <div className="mt-[10px] flex gap-3 text-gray-400 font-medium text-sm">
         <div className="text-xs">{year}</div>
         <div className="flex items-center gap-1 text-xs">
-            <span className="text-yellow-400 text-lg leading-4 -mt-0.5">★</span>
-            <span className="font-">{rating !== 'N/A' ? rating : 'No Rating'}</span>
+          <span className="text-yellow-400 text-lg leading-4 -mt-0.5">★</span>
+          <span className="font-">{rating !== 'N/A' ? rating : 'No Rating'}</span>
         </div>
       </div>
     </div>
-  </div>
+  </Link>
   )
 }
