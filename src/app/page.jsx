@@ -1,5 +1,5 @@
 'use client';
-import { HomePageSection } from "@/components/HomePageSection";
+import { MediaContainer } from "@/components/MediaContainer";
 import MediaCard from "@/components/MediaCard";
 import { useEffect, useState } from "react";
 import LoadingSkeleton from "@/components/LoadingSkeleton";
@@ -68,42 +68,42 @@ export default function Home() {
 		} */}
 
 		{error ? <div className="text-center text-red-500 py-10">{error}</div> : null}
-		<HomePageSection title="Latest Movies" id="latestMovies">
+		<MediaContainer title="Latest Movies" id="latestMovies">
 			{isloading ?
 				<LoadingSkeleton count={6} /> : 
 				latestMoviesDataState.map((item) => (
 					<MediaCard key={item.id} item={item} isMovie={true} layoutType="grid" />
 				))
 			}
-		</HomePageSection>
+		</MediaContainer>
 
-		<HomePageSection title="Latest TV Shows" id="latestTVShows">
+		<MediaContainer title="Latest TV Shows" id="latestTVShows">
 			{isloading ?
 				<LoadingSkeleton count={6} /> : 
 				latestTVShowsDataState.map((item) => (
 					<MediaCard key={item.id} item={item} isMovie={false} layoutType="grid" />
 				))
 			}
-		</HomePageSection>
+		</MediaContainer>
 
 
-		<HomePageSection title="Top Rated Movies" id="topMovies" type="horizontal-container">
+		<MediaContainer title="Top Rated Movies" id="topMovies" type="horizontal-container">
 			{isloading ?
 				<LoadingSkeleton count={12} layoutType="horizontal"/> :
 				topMoviesDataState.map((item) => (
 					<MediaCard key={item.id} item={item} isMovie={true} layoutType="horizontal" />
 				))
 			}
-		</HomePageSection>
+		</MediaContainer>
 
-		<HomePageSection title="Top Rated TV Shows" id="topTVShows" type="horizontal-container">
+		<MediaContainer title="Top Rated TV Shows" id="topTVShows" type="horizontal-container">
 			{isloading ?
 				<LoadingSkeleton count={12} layoutType="horizontal"/> :
 				topTVShowsDataState.map((item) => (
 					<MediaCard key={item.id} item={item} isMovie={false} layoutType="horizontal" />
 				))
 			}
-		</HomePageSection>
+		</MediaContainer>
 	</main>
   );
 }
