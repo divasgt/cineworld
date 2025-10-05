@@ -25,7 +25,7 @@ export default function MediaCard({item, isMovie, layoutType}) {
 
   return (
   <div className={twMerge(
-      'bg-gray-800 rounded-lg overflow-hidden shadow-md transition-transform duration-300 ease-in-out cursor-pointer hover:scale-105',
+      'rounded-lg overflow-hidden bg-gray-600/20 transition-transform duration-300 ease-in-out cursor-pointer hover:scale-105 hover:shadow-lg hover:shadow-black/40',
       layoutType === 'horizontal' && 'shrink-0 w-[200px]'
     )}
     onClick={handleCardClick}
@@ -40,12 +40,12 @@ export default function MediaCard({item, isMovie, layoutType}) {
       // onError={this.src=PLACEHOLDER_IMAGE_URL(placeholderWidth, placeholderHeight)}
     />
     <div className="p-3">
-      <h3 className="font-semibold text-sm overflow-hidden text-ellipsis whitespace-nowrap" title={title}>{title}</h3>
-      <div className="mt-[10px] flex gap-[10px]">
+      <h3 className="font-semibold text-sm overflow" title={title}>{title}</h3>
+      <div className="mt-[10px] flex gap-3 text-gray-400 font-medium text-sm">
         <div className="text-xs">{year}</div>
-        <div className="flex items-center text-xs">
-            <span className="text-yellow-400 mr-1">★</span>
-            <span>{rating !== 'N/A' ? rating : 'No Rating'}</span>
+        <div className="flex items-center gap-1 text-xs">
+            <span className="text-yellow-400 text-lg leading-4 -mt-0.5">★</span>
+            <span className="font-">{rating !== 'N/A' ? rating : 'No Rating'}</span>
         </div>
       </div>
     </div>
