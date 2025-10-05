@@ -1,6 +1,6 @@
 import MediaDetailsContainer from "@/components/media-details-page/MediaDetailsContainer";
 
-export default async function tvPage({params}) {
+export default async function TvPage({params}) {
   const {id} = await params
   
   return (
