@@ -3,8 +3,6 @@ import { HomePageSection } from "@/components/HomePageSection";
 import MediaCard from "@/components/MediaCard";
 import { useEffect, useState } from "react";
 import LoadingSkeleton from "@/components/LoadingSkeleton";
-import "@/styles/MediaCard.css"
-
 
 export default function Home() {
 	const [isloading, setIsLoading] = useState(true)
@@ -91,7 +89,7 @@ export default function Home() {
 
 		<HomePageSection title="Top Rated Movies" id="topMovies" type="horizontal-container">
 			{isloading ?
-				<LoadingSkeleton count={12}/> :
+				<LoadingSkeleton count={12} layoutType="horizontal"/> :
 				topMoviesDataState.map((item) => (
 					<MediaCard key={item.id} item={item} isMovie={true} layoutType="horizontal" />
 				))
@@ -100,7 +98,7 @@ export default function Home() {
 
 		<HomePageSection title="Top Rated TV Shows" id="topTVShows" type="horizontal-container">
 			{isloading ?
-				<LoadingSkeleton count={12}/> :
+				<LoadingSkeleton count={12} layoutType="horizontal"/> :
 				topTVShowsDataState.map((item) => (
 					<MediaCard key={item.id} item={item} isMovie={false} layoutType="horizontal" />
 				))
