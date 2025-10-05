@@ -48,7 +48,7 @@ export default async function MediaDetailsContainer({type, id}) {
   const typeLabel = type === 'movie' ? 'Movie' : 'TV Show'  
   
   return (
-  <div className="py-10 px-12 md:px-24 z-0">
+    <div className="py-10 px-12 md:px-24 z-0">
     {detailsData.backdrop_path ? 
       <div className="fixed z-[-1] top-0 right-0 bottom-0 left-0 blur-3xl">
         <Image
@@ -110,10 +110,12 @@ export default async function MediaDetailsContainer({type, id}) {
           <WatchlistBtn />
           <AskAIBtn />
         </div>
+        
+        <span className="mb-6">
+          <WatchProviders detailsData={detailsData}/>
+        </span>
 
-        <WatchProviders detailsData={detailsData}/>
-
-        {detailsData.tagline ? <p className="italic text-gray-300 mt-8">"{detailsData.tagline}"</p> : null}
+        {detailsData.tagline ? <p className="italic text-gray-300 -mb-2">"{detailsData.tagline}"</p> : null}
         {/* <h2 className="text-2xl font-semibold mt-4 text-white">Overview</h2> */}
         <p className="max-w-3xl">{detailsData.overview}</p>
 

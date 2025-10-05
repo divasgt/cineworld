@@ -2,6 +2,7 @@
 import { useMemo } from "react";
 import Image from "next/image";
 import { IMAGE_BASE_URL } from "@/utils/constants";
+// import { MdErrorOutline } from 'react-icons/md';
 
 export default function WatchProviders({detailsData}) {
   const providers = detailsData['watch/providers']?.results?.IN
@@ -28,7 +29,10 @@ export default function WatchProviders({detailsData}) {
 
   // Don't render anything if there are no providers
   if (providersList.length === 0) {
-    return <p>Not available for streaming in your region.</p>
+    return <p className="text-white flex items-center gap-2">
+      {/* <MdErrorOutline className="inline-block size-5"/>  */}
+      Not available for streaming in your region.
+    </p>
   }
 
   return (
