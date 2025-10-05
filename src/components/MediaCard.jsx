@@ -1,8 +1,8 @@
 'use client';
-import "@/styles/MediaCard.css";
 import { useRouter } from "next/navigation";
 import { IMAGE_BASE_URL, PLACEHOLDER_IMAGE_URL } from "@/utils/constants";
 import Image from "next/image";
+import { twMerge } from "tailwind-merge";
 
 export default function MediaCard({item, isMovie, layoutType}) {
   const router = useRouter();
@@ -24,24 +24,27 @@ export default function MediaCard({item, isMovie, layoutType}) {
   }
 
   return (
-  <div className='card'
+  <div className={twMerge(
+      'bg-gray-800 rounded-lg overflow-hidden shadow-md transition-transform duration-300 ease-in-out cursor-pointer hover:scale-105',
+      layoutType === 'horizontal' && 'shrink-0 w-[200px]'
+    )}
     onClick={handleCardClick}
   >
     <Image
-     src={posterPath}
+      src={posterPath}
       alt={title}
-      className="card-img"
+      className="block w-full h-auto aspect-[2/3] object-cover bg-gray-700"
       height={342}
       width={342}
       unoptimized={!item.poster_path}
       // onError={this.src=PLACEHOLDER_IMAGE_URL(placeholderWidth, placeholderHeight)}
     />
-    <div className="card-body">
-      <h3 className="card-title" title={title}>{title}</h3>
-      <div className="year-and-rating-container">
-        <div className="card-year">{year}</div>
-        <div className="card-rating">
-            <span className="star">★</span>
+    <div className="p-3">
+      <h3 className="font-semibold text-sm overflow-hidden text-ellipsis whitespace-nowrap" title={title}>{title}</h3>
+      <div className="mt-[10px] flex gap-[10px]">
+        <div className="text-xs">{year}</div>
+        <div className="flex items-center text-xs">
+            <span className="text-yellow-400 mr-1">★</span>
             <span>{rating !== 'N/A' ? rating : 'No Rating'}</span>
         </div>
       </div>
