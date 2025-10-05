@@ -79,27 +79,24 @@ export default async function MediaDetailsContainer({type, id}) {
       </div>
 
       <div className="flex flex-col gap-5 self-start">
-
         <h1 className="text-[48px] font-bold text-white leading-tight ml-[-3px]">{detailsData.name || detailsData.title} ({releaseYear})</h1>
 
-        {/* <div className="flex gap-10 text-gray-400 flex-wrap"> */}
-          <div className="flex items-center gap-4 text-gray-400 font-medium flex-wrap mb-2">
-            <span className="text-red-600 mr-4">{typeLabel}</span>
-            <span className="flex gap-2 items-center">
-              <MdStar className="text-amber-500 text-2xl mb-0.5" />
-              <span className="text-md  tracking-wide">{detailsData.vote_average.toFixed(1)}</span>
-            </span> • 
-            <span>{lengthOrSeasons}</span> • 
-            <span className="border border-gray-400 rounded px-2 py-0.5 text-sm">{ageRating}</span>
-          </div>
+        <div className="flex items-center gap-4 text-gray-400 font-medium flex-wrap mb-2">
+          <span className="text-red-600 mr-4">{typeLabel}</span>
+          <span className="flex gap-2 items-center">
+            <MdStar className="text-amber-500 text-2xl mb-0.5" />
+            <span className="text-md  tracking-wide">{detailsData.vote_average.toFixed(1)}</span>
+          </span> • 
+          <span>{lengthOrSeasons}</span> • 
+          <span className="border border-gray-400 rounded px-2 py-0.5 text-sm">{ageRating}</span>
+        </div>
 
-          <div className="flex flex-wrap gap-2 items-center mb-2">
-            {/* Genres: */}
-            {detailsData.genres?.map(g => (
-              <span className="bg-gray-700/50 border border-gray-500/10 backdrop-blur-xl py-0.5 px-3 rounded-full text-sm" key={g.id}>{g.name}</span>
-            ))}
-          </div>
-        {/* </div> */}
+        {/* Genres: */}
+        <div className="flex flex-wrap gap-2 items-center mb-2">
+          {detailsData.genres?.map(g => (
+            <span className="bg-gray-700/50 border border-gray-500/10 backdrop-blur-xl py-0.5 px-3 rounded-full text-sm" key={g.id}>{g.name}</span>
+          ))}
+        </div>
 
         {/* <div className="flex items-baseline gap-2 text-lg mt-1 mb-2"> */}
           
