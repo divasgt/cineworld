@@ -1,8 +1,8 @@
 
 export function HomePageSection({id, title, type="grid-container", children}) {
   return (
-  <section className="section mb-10">
-    <h2 className="section-title text-2xl font-semibold mb-4 pb-2 border-b-2 border-red-600">{title}</h2>
+  <section className="section my-10">
+    <h2 className="section-title text-2xl font-semibold mb-4 pb-2 border-b-2 border-red-600 inline-block">{title}</h2>
 
     {type==="grid-container" && 
       <div id={id} className="grid-container grid grid-cols-2 gap-4 pb-4 md:grid-cols-4 md:gap-4 lg:grid-cols-6 lg:gap-5">
@@ -11,7 +11,7 @@ export function HomePageSection({id, title, type="grid-container", children}) {
     }
 
     {type==="horizontal-container" && 
-      <div id={id} className="horizontal-container flex overflow-x-auto gap-4 pb-4">
+      <div id={id} className="horizontal-container flex overflow-x-auto gap-4 lg:gap-5 p-4 -m-4">
         {children}
       </div>
     }

@@ -10,6 +10,8 @@ import { HiClock } from 'react-icons/hi2';
 import { MdStar } from 'react-icons/md';
 import WatchProviders from "./WatchProviders";
 import CastSection from "./CastSection";
+import Similars from "./Similars";
+import { HomePageSection } from "../HomePageSection";
 
 function getAgeRating(detailsData, type) {
   if (type==="movie" && detailsData.release_dates) {
@@ -119,6 +121,9 @@ export default async function MediaDetailsContainer({type, id}) {
     </div>
 
     <CastSection data={detailsData.credits.cast} />
+    <HomePageSection title="You may also like" id="topMovies" type="horizontal-container">
+      <Similars data={detailsData.similar.results} />
+    </HomePageSection>
   </div>
   )
 }
