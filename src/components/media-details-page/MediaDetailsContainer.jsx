@@ -9,6 +9,7 @@ import { MdCalendarMonth } from 'react-icons/md';
 import { HiClock } from 'react-icons/hi2';
 import { MdStar } from 'react-icons/md';
 import WatchProviders from "./WatchProviders";
+import CastSection from "./CastSection";
 
 function getAgeRating(detailsData, type) {
   if (type==="movie" && detailsData.release_dates) {
@@ -45,7 +46,7 @@ export default async function MediaDetailsContainer({type, id}) {
   const typeLabel = type === 'movie' ? 'Movie' : 'TV Show'  
   
   return (
-  <>
+  <div className="py-10 px-12 md:px-24 z-0">
     {detailsData.backdrop_path ? 
       <div className="fixed z-[-1] top-0 right-0 bottom-0 left-0 blur-3xl">
         <Image
@@ -61,7 +62,7 @@ export default async function MediaDetailsContainer({type, id}) {
       : ""
     }
 
-    <div id="detailsContainer" className="grid grid-cols-1 md:grid-cols-[350px_1fr] gap-10 relative py-10 px-12 md:px-24 z-0 text-gray-300">
+    <div id="detailsContainer" className="grid grid-cols-1 md:grid-cols-[350px_1fr] gap-10 relative text-gray-300">
 
       <div className="rounded-lg overflow-hidden shadow-lg self-start md:max-w-full max-w-[300px]">
         <Image
@@ -73,6 +74,7 @@ export default async function MediaDetailsContainer({type, id}) {
           width={300}
           height={450}
           priority
+          unoptimized={!detailsData.poster_path}
         />
       </div>
 
@@ -118,6 +120,8 @@ export default async function MediaDetailsContainer({type, id}) {
 
       </div>
     </div>
-  </>
+
+    <CastSection data={detailsData.credits.cast} />
+  </div>
   )
 }
