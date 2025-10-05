@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
     <body className={`${inter.className} flex flex-col min-h-screen bg-black text-white`}>
       <Header />
 
-      <div className="grow pt-15 min-h-screen">
+      <div className="shrink-0 pt-15 min-h-screen flex-1 flex flex-col">
       {children}
       </div>
 
