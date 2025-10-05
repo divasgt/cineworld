@@ -120,10 +120,21 @@ export default async function MediaDetailsContainer({type, id}) {
       </div>
     </div>
 
-    <CastSection data={detailsData.credits.cast} />
-    <MediaContainer title="You may also like" id="topMovies" type="horizontal-container">
-      <Similars data={detailsData.similar.results} />
-    </MediaContainer>
+    {detailsData.credits.cast.length>0 &&
+      <CastSection data={detailsData.credits.cast} />
+    }
+
+    {detailsData.similar.results.length>0 &&
+      <MediaContainer title="More like this" id="" type="horizontal-container">
+        <Similars data={detailsData.similar.results} type={type} />
+      </MediaContainer>
+    }
+
+    {detailsData.recommendations.results.length>0 &&
+      <MediaContainer title="You may also like" id="" type="horizontal-container">
+        <Similars data={detailsData.recommendations.results} type={type} />
+      </MediaContainer>
+    }
   </div>
   )
 }
