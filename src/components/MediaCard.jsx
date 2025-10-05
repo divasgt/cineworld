@@ -25,7 +25,7 @@ export default function MediaCard({item, isMovie, layoutType}) {
 
   return (
   <div className={twMerge(
-      'rounded-lg overflow-hidden bg-gray-600/20 transition-transform duration-300 ease-in-out cursor-pointer hover:scale-105 hover:shadow-lg hover:shadow-black/40',
+      'rounded-lg overflow-hidden bg-gray-600/20 transition-transform duration-300 ease-in-out cursor-pointer hover:scale-105 hover:shadow-lg hover:shadow-black/40 backdrop-blur-xl shadow',
       layoutType === 'horizontal' && 'shrink-0 w-[200px]'
     )}
     onClick={handleCardClick}
