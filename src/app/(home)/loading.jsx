@@ -1,5 +1,6 @@
 import { MediaContainer } from "@/components/MediaContainer";
 import LoadingSkeleton from "@/components/LoadingSkeleton";
+import H2ForSection from "@/components/H2ForSection";
 
 export default function Loading() {
   return (
@@ -12,21 +13,33 @@ export default function Loading() {
         </p>
       </section>
 
-      <MediaContainer title="Latest Movies" id="latestMovies">
-        <LoadingSkeleton count={6} />
-      </MediaContainer>
+      <section className="my-14">
+        <H2ForSection title="Latest Movies" />
+        <MediaContainer title="Latest Movies" id="latestMovies">
+          <LoadingSkeleton count={6} />
+        </MediaContainer>
+      </section>
 
-      <MediaContainer title="Latest TV Shows" id="latestTVShows">
-        <LoadingSkeleton count={6} />
-      </MediaContainer>
+      <section className="my-14">
+        <H2ForSection title="Latest TV Shows" />
+        <MediaContainer title="Latest TV Shows" id="latestTVShows">
+          <LoadingSkeleton count={6} />
+        </MediaContainer>
+      </section>
 
-      <MediaContainer title="Top Rated Movies" id="topMovies" type="horizontal-container">
-        <LoadingSkeleton count={12} layoutType="horizontal"/>
-      </MediaContainer>
+      <section className="my-14">
+        <H2ForSection title="Top Rated Movies" />
+        <MediaContainer title="Top Rated Movies" id="topMovies" type="horizontal-container">
+          <LoadingSkeleton count={12} layoutType="horizontal" />
+        </MediaContainer>
+      </section>
 
-      <MediaContainer title="Top Rated TV Shows" id="topTVShows" type="horizontal-container">
-        <LoadingSkeleton count={12} layoutType="horizontal"/>
-      </MediaContainer>
+      <section className="my-14">
+        <H2ForSection title="Top Rated TV Shows" />
+        <MediaContainer title="Top Rated TV Shows" id="topTVShows" type="horizontal-container">
+          <LoadingSkeleton count={12} layoutType="horizontal" />
+        </MediaContainer>
+      </section>
     </main>
   );
 }
