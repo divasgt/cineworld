@@ -12,6 +12,7 @@ import WatchProviders from "./WatchProviders";
 import CastSection from "./CastSection";
 import Similars from "./Similars";
 import { MediaContainer } from "../MediaContainer";
+import H2ForSection from "../H2ForSection";
 
 function getAgeRating(detailsData, type) {
   if (type==="movie" && detailsData.release_dates) {
@@ -48,7 +49,7 @@ export default async function MediaDetailsContainer({type, id}) {
   const typeLabel = type === 'movie' ? 'Movie' : 'TV Show'  
   
   return (
-    <div className="py-10 px-12 md:px-24 z-0">
+  <div className="py-10 px-12 md:px-24 z-0">
     {detailsData.backdrop_path ? 
       <div className="fixed z-[-1] top-0 right-0 bottom-0 left-0 blur-3xl">
         <Image
@@ -127,15 +128,21 @@ export default async function MediaDetailsContainer({type, id}) {
     }
 
     {detailsData.similar.results.length>0 &&
-      <MediaContainer title="More like this" id="" type="horizontal-container">
+    <>
+      <H2ForSection title="More like this" className="mt-16" />
+      <MediaContainer title="More like this" type="horizontal-container">
         <Similars data={detailsData.similar.results} type={type} />
       </MediaContainer>
+    </>
     }
 
     {detailsData.recommendations.results.length>0 &&
-      <MediaContainer title="You may also like" id="" type="horizontal-container">
+    <>
+      <H2ForSection title="You may also like" className="mt-16" />
+      <MediaContainer type="horizontal-container">
         <Similars data={detailsData.recommendations.results} type={type} />
       </MediaContainer>
+    </>
     }
   </div>
   )
