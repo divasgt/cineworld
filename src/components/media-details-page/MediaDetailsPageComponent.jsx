@@ -32,7 +32,7 @@ function getAgeRating(detailsData, type) {
   return detailsData.adult ? '18+' : 'All Ages'
 }
 
-export default async function MediaDetailsContainer({type, id}) {
+export default async function MediaDetailsPageComponent({type, id}) {
   let detailsData
   try {
     detailsData = await fetchFromTmdb(`/${type}/${id}`, "detailsPage")

@@ -1,11 +1,11 @@
-import MediaDetailsContainer from "@/components/media-details-page/MediaDetailsContainer";
+import MediaDetailsPageComponent from "@/components/media-details-page/MediaDetailsPageComponent"
 
 export default async function MoviePage({params}) {
   const {id} = await params
   
   return (
   <main className="main-content">
-    <MediaDetailsContainer type="movie" id={id} />
+    <MediaDetailsPageComponent type="movie" id={id} />
   </main>
   )
 }
