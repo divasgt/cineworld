@@ -34,7 +34,7 @@ export default function MediaCard({item, isMovie, layoutType}) {
     />
 
     <div className="p-3">
-      <h3 className="font-semibold text-sm overflow" title={title}>{title}</h3>
+      <h3 className="text-md overflow" title={title}>{title}</h3>
 
       <div className="mt-[10px] flex gap-3 text-gray-400 font-medium text-sm">
         <div className="text-xs">{year}</div>
