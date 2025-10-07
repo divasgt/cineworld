@@ -36,7 +36,7 @@ export default function SearchPage() {
   }, [query])
 
   return (
-  <div className="px-24 my-14">
+  <main className="px-24 my-14">
     <H2ForSection title="Search Results" />
     {isLoading ? 
       <Loading />
@@ -51,7 +51,7 @@ export default function SearchPage() {
         :
         <div className="loading mt-24 grid-span text-center text-xl">No results found for your query.</div>
     }
-  </div>
+  </main>
   )
 }
 
