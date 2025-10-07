@@ -4,9 +4,7 @@ import Image from "next/image";
 import { IMAGE_BASE_URL } from "@/utils/constants";
 // import { MdErrorOutline } from 'react-icons/md';
 
-export default function WatchProviders({detailsData}) {
-  const providers = detailsData['watch/providers']?.results?.IN
-
+export default function WatchProviders({providers}) {
   const providersList = useMemo(() => {
     if (providers && (providers.flatrate || providers.buy || providers.rent)) {
       const allProviders = [

@@ -113,7 +113,7 @@ export default async function MediaDetailsPageComponent({type, id}) {
         </div>
         
         <span className="mb-6">
-          <WatchProviders detailsData={detailsData}/>
+          <WatchProviders providers={detailsData['watch/providers']?.results?.IN}/>
         </span>
 
         {detailsData.tagline ? <p className="italic text-gray-300 -mb-2">"{detailsData.tagline}"</p> : null}
