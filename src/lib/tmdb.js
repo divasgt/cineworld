@@ -1,6 +1,6 @@
 // Configuration 
-const TMDB_API_KEY = process.env.TMDB_API_KEY;
-const BASE_URL = 'https://api.themoviedb.org/3';
+export const TMDB_API_KEY = process.env.TMDB_API_KEY;
+export const BASE_URL = 'https://api.themoviedb.org/3';
 
 // This function should throw on error to let the caller decide how to handle it.
 export async function fetchFromTmdb(endpoint, type) {

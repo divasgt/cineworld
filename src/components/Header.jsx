@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { MdSearch } from 'react-icons/md';
 import HeaderButton from "./HeaderButton";
+import HeaderSearchBox from "./HeaderSearchBox";
 
 export default function Header() {
   return (
@@ -15,11 +15,7 @@ export default function Header() {
       </nav>
     </div>
 
-    <div className="search-wrapper flex mx-10 w-70 focus-within:w-full transition-all duration-400 items-center relative flex-shrink">
-      <span className="search-icon absolute left-4 opacity-80%"> <MdSearch className="size-4.25"/> </span>
-      <input type="text" id="header-search" placeholder="Search anything..."
-        className="bg-[#1f2937] focus:bg-gray-800 py-1.25 px-4 pl-12 pr-10 w-full  text-sm  rounded-lg border-transparent  focus:border-[#9ca3af62] focus:border outline-none placeholder:text-center" />
-    </div>
+    <HeaderSearchBox />
 
     <div className="header-right flex items-center gap-5 shrink-0">
       <Link href="/mood-recommend">
