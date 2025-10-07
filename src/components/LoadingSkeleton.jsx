@@ -7,7 +7,7 @@ const LoadingSkeleton = ({ count = 6, layoutType }) => {
     <div
       key={index}
       className={twMerge(
-        'bg-gray-700 rounded-lg overflow-hidden shadow-md animate-pulse',
+        'bg-gray-600/20 backdrop-blur-xl rounded-lg overflow-hidden shadow-md animate-pulse',
         layoutType === 'horizontal' ? 'shrink-0 w-[200px]' : 'w-full'
       )}
     >
