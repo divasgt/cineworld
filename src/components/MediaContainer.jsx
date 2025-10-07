@@ -1,5 +1,5 @@
 
-export function MediaContainer({id, title, type="grid-container", children}) {
+export function MediaContainer({id="", title, type="grid-container", children}) {
   return (
   <section className="section my-10">
     <h2 className="section-title text-2xl font-semibold mb-4 pb-2 border-b-2 border-red-600 inline-block">{title}</h2>

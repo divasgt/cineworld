@@ -26,7 +26,7 @@ export default function MediaCard({item, isMovie, layoutType}) {
   >
     <Image
       src={posterPath}
-      alt={title}
+      alt={title || ""}
       className="block w-full h-auto aspect-[2/3] object-cover bg-gray-700"
       height={342}
       width={342}
