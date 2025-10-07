@@ -4,16 +4,16 @@ import { useEffect, useState } from "react";
 import { MdSearch } from 'react-icons/md';
 
 export default function HeaderSearchBox() {
-  const [query, setQuery] = useState("")
+  const [query, setQuery] = useState(null)
   const router = useRouter()
 
   useEffect(() => {
     if (query) {
       const timer = setTimeout(() =>{
         router.push(`/search?q=${encodeURIComponent(query.trim())}`)
-      }, 100) // 100ms delay
+      }, 200) // 200ms delay
       return () => clearTimeout(timer)
-    } else {
+    } else if (query==="") {
       router.push('/search')
     }
   }, [query, router])
@@ -27,7 +27,7 @@ export default function HeaderSearchBox() {
       id="header-search"
       placeholder="Search anything..."
       className="bg-[#1f2937] focus:bg-gray-800 py-1.25 px-4 pl-12 pr-10 w-full  text-sm  rounded-lg border-transparent  focus:border-[#9ca3af62] focus:border outline-none placeholder:text-center"
-      value={query}
+      value={query || ""}
       onChange={(e) => setQuery(e.target.value)}
       onKeyDown={(e) => e.key==="Enter" ? router.push(`/search?q=${encodeURIComponent(query.trim())}`) : null}
       // onClick={() => router.push('/search')}
