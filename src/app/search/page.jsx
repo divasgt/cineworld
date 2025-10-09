@@ -48,8 +48,10 @@ export default function SearchPage() {
             ))
           }
         </MediaContainer>
-        :
-        <div className="loading mt-24 grid-span text-center text-xl">No results found for your query.</div>
+        : (query && searchResults.length===0) ?
+          <div className="mt-24 grid-span text-center text-xl">No results found for your query.</div>
+          :
+          <div className="mt-24 grid-span text-center text-xl">Search any movie, tv show or anime etc.</div>
     }
   </main>
   )
@@ -57,6 +59,6 @@ export default function SearchPage() {
 
 function Loading() {
   return (
-  <div className="loading mt-24 animate-pulse text-center text-xl">Searching...</div>
+  <div className="loading mt-24 shimmer text-center font-semibold text-xl">Searching...</div>
   )
 }
