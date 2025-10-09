@@ -13,6 +13,7 @@ import CastSection from "./CastSection";
 import Similars from "./Similars";
 import { MediaContainer } from "../MediaContainer";
 import H2ForSection from "../H2ForSection";
+import ScrollToTop from "@/components/ScrollToTop";
 
 function getAgeRating(detailsData, type) {
   if (type==="movie" && detailsData.release_dates) {
@@ -50,6 +51,7 @@ export default async function MediaDetailsPageComponent({type, id}) {
   
   return (
   <div className="py-10 px-12 md:px-24 z-0">
+    <ScrollToTop />
     {detailsData.backdrop_path ? 
       <div className="fixed z-[-1] top-0 right-0 bottom-0 left-0 blur-3xl">
         <Image
