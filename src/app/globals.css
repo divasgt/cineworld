@@ -25,6 +25,69 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Shimmer animation */
+/* From https://www.perplexity.ai/browser/invite-ga , https://pplx-next-static-public.perplexity.ai/_spa-aux/assets/index-OD9rz7ah.css*/
+/* .shimmer {
+  animation-name: shimmer;
+  animation-iteration-count: infinite;
+  -webkit-mask-image: linear-gradient(-70deg, black 50%, #0005, black 65%);
+  mask-image: linear-gradient(-70deg, #000 50%, #0005, #000 65%);
+  -webkit-mask-size: 300% 100%;
+  mask-size: 300% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: right;
+  mask-position: right;
+}
+
+@keyframes shimmer {
+  to {
+    -webkit-mask-position: left;
+    mask-position: left;
+  }
+} */
+
+
+/* Generic Shimmer Animation */
+.shimmer {
+  /* display: inline-block; */
+  /* position: relative; */
+  background: linear-gradient(
+    120deg,
+    #ededed 30%,
+    #585858 45%,
+    #ededed 60%
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer-move 3s infinite linear;
+}
+
+/* The shimmer moving animation */
+@keyframes shimmer-move {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+
+
+/* @keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  
+  100% {
+    background-position: -100% 0;
+  }
+} */
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 5px;
