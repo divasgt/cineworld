@@ -57,17 +57,6 @@ body {
 }
 
 
-
-/* @keyframes shimmer {
-  0% {
-    background-position: 100% 0;
-  }
-  
-  100% {
-    background-position: -100% 0;
-  }
-} */
-
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 5px;
