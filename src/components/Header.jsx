@@ -1,10 +1,28 @@
+"use client";
 import Link from "next/link";
 import HeaderButton from "./HeaderButton";
 import HeaderSearchBox from "./HeaderSearchBox";
+import { useEffect, useState } from "react";
 
 export default function Header() {
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    function handleScroll() {
+      // check if scroll vertical position > 40px
+      setScrolled(window.scrollY > 40)
+    }
+    
+    window.addEventListener("scroll", handleScroll)
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [])
+  
   return (
-  <header className="header bg-gray-900/30 backdrop-blur-sm text-gray-400 font-medium flex fixed top-0 w-screen items-center px-9 py-3.5 justify-between z-1000">
+  <header className={`header fixed text-gray-400 font-medium flex top-0 w-screen items-center px-9 py-3.5 justify-between z-1000 ${
+    scrolled ? "bg-gray-900/50 backdrop-blur-md border-b border-gray-500/20" : "bg-transparent border-none"
+  }`}>
 
     <div className="header-left shrink-0">
       <nav className="nav-links flex gap-5 items-center shrink-0">
