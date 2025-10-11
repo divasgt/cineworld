@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { IoMdSend } from 'react-icons/io';
 import Markdown from "react-markdown";
+import RecommendationCard from "@/components/RecommendationCard";
 
 export default function AskAIPage() {
   const [isLoading, setIsLoading] = useState(false)
@@ -12,6 +13,7 @@ export default function AskAIPage() {
     {
       role: "bot",
       content: "Welcome to CineWorld! I'm CineBot, your personal movie and TV show assistant. Ask me anything about cinema or request some recommendations!",
+      type: "text",
     },
   ]);
   const messagesEndRef = useRef(null)
@@ -31,6 +33,7 @@ export default function AskAIPage() {
     const userMessage = {
       role: "user",
       content: query,
+      type: "text",
     }
     setMessages(prev => [...prev, userMessage])
     setIsLoading(true)
@@ -51,16 +54,17 @@ export default function AskAIPage() {
       const botMessage = {
         role: "bot",
         content: result.data,
+        type: result.type,
       }
       setMessages((prev) => [...prev, botMessage])
-      console.log(result.data)
     } catch(err) {
       const errorMessage = err instanceof Error ? err.message : 'An unknown error.'
       console.error("Failed to get response from AI", err)
       const errorBotMessage = {
         role: "bot",
         // content: `Sorry, I've encountered an error.`,
-        content: `Sorry, I've encountered an error: ${errorMessage}`
+        content: `Sorry, I've encountered an error: ${errorMessage}`,
+        type: "text",
       }
       setMessages(prev => [...prev, errorBotMessage])
 
@@ -69,14 +73,28 @@ export default function AskAIPage() {
     }
   }
 
-  const messageElements = messages.map((message, index) => (
-    <div
-      key={index}
-      className={`py-2 px-3 backdrop-blur-xl max-w-xl rounded-xl whitespace-pre-wrap ${message.role==="bot" ? "bg-gray-600/20 self-start rounded-bl-none" : "bg-blue-800/50 self-end rounded-br-none"}`}
-    >
-      <Markdown>{message.content}</Markdown>
-    </div>
-  ))
+  const messageElements = messages.map((message, index) => {
+    // If the message is a recommendation, render the cards
+    if (message.type === 'recommendation' && Array.isArray(message.content)) {
+      return (
+        <div key={index} className="flex flex-col gap-3 self-start w-full">
+          {message.content.map((item, itemIndex) => (
+            <RecommendationCard key={itemIndex} item={item} />
+          ))}
+        </div>
+      )
+    }
+
+    // Default rendering for text messages
+    return (
+      <div
+        key={index}
+        className={`py-2 px-3 backdrop-blur-xl max-w-xl rounded-xl whitespace-pre-wrap ${message.role==="bot" ? "bg-gray-600/20 self-start rounded-bl-none" : "bg-blue-800/50 self-end rounded-br-none"}`}
+      >
+        <Markdown>{message.content}</Markdown>
+      </div>
+    )
+  })
   
 
   return (

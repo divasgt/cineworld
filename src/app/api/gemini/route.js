@@ -45,9 +45,26 @@ export async function POST(request) {
     
     const response = await chat.sendMessage({ message: query });
 
-    const text = response.text;
-    // console.log(response.text)
-    return NextResponse.json({type: "text", data: text});
+    let text = response.text;
+    
+    // Attempt to extract JSON from a markdown code block
+    const jsonMatch = text.match(/```json\s*([\s\S]*?)\s*```/);
+    if (jsonMatch && jsonMatch[1]) {
+      text = jsonMatch[1];
+    }
+    
+    // check if json, and return it
+    try {
+      const jsonData = JSON.parse(text);
+      if (Array.isArray(jsonData)) {
+        return NextResponse.json({ type: "recommendation", data: jsonData });
+      }
+    } catch (e) {
+      // Not a JSON response, treat as plain text
+    }
+    
+    // return plain text
+    return NextResponse.json({type: "text", data: response.text});
   } catch (err) {
     return NextResponse.json(
       {error: "API error"},
