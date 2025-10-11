@@ -15,9 +15,10 @@ export default function AskAIPage() {
   ]);
   const messagesEndRef = useRef(null)
 
-  // scroll to bottom when on the last message
+  // scroll to bottom when to the last message
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({behavior: "smooth"})
+    // added block: "end" to scroll into view at the bottom of the window
+    messagesEndRef.current?.scrollIntoView({behavior: "smooth", block: "end"})
   }, [messages])
 
   async function handleSubmit(e) {
@@ -71,28 +72,27 @@ export default function AskAIPage() {
   const messageElements = messages.map((message, index) => (
     <div
       key={index}
-      // ref={index===messages.length-1 ? messagesEndRef : null}
       className={`py-2 px-3 backdrop-blur-xl max-w-xl rounded-xl ${message.role==="bot" ? "bg-gray-600/20 self-start rounded-bl-none" : "bg-blue-800/50 self-end rounded-br-none"}`}
     >{message.content}</div>
   ))
   
   return (
-  <main className="flex flex-col h-[calc(100vh-70px)] px-4 md:px-24">
+  <main className="flex flex-col h-[calc(100vh-70px)] px-4 lg:px-52">
     <div className="flex items-baseline justify-center gap-4 mt-4 mb-4">
       <h1 className="text-2xl font-semibold inline-block">Cinema AI</h1>
       <p className="inline-block text-lg text-gray-300">Ask AI to find your perfect watch!</p>
     </div>
 
-    <div className="chat-window flex-1 w-full max-w-5xl mx-auto rounded-2xl overflow-y-auto">
-      <div className="messages-container flex flex-col gap-3 mt-6 pb-4 px-4">
+    <div className="chat-window flex-1 w-full mx-auto rounded-2xl overflow-y-auto">
+      <div className="messages-container flex flex-col gap-3 px-4">
         {messageElements}
         {isLoading &&
           <div className="py-2 px-3 backdrop-blur-xl max-w-xl rounded-xl bg-gray-600/20 self-start rounded-bl-none">
             <div className="animate-pulse">CineBot is typing...</div>
           </div>
         }
-        <div ref={messagesEndRef} />
       </div>
+      <div ref={messagesEndRef} />
     </div>
 
     <form onSubmit={handleSubmit} className="flex gap-4 w-full max-w-2xl mx-auto py-4">
