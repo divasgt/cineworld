@@ -2,7 +2,7 @@ import { GoogleGenAI } from "@google/genai";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
-  const {query, messages} = await request.json()
+  const {query, history} = await request.json()
 
   const systemInstruction = `You are CineBot, a cheerful and knowledgeable AI assistant for the CineWorld website. Your sole purpose is to discuss cinema, movies, TV shows, anime, documentaries, actors, genres, and movie trivia.
 
@@ -27,11 +27,6 @@ export async function POST(request) {
   const ai = new GoogleGenAI({});
   // const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
-  // Transform the client-side message history into the format Google GenAI expects
-  const history = messages.map((msg) => ({
-    role: msg.role === "bot" ? "model" : "user",
-    parts: [{ text: msg.content }],
-  }));
 
   try {
     // Create a chat session which will persist the history
