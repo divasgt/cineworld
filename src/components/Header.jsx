@@ -13,6 +13,8 @@ export default function Header() {
       setScrolled(window.scrollY > 40)
     }
     
+    // call function once, used for when page is loaded scrolled down.
+    handleScroll()
     window.addEventListener("scroll", handleScroll)
     return () => {
       window.removeEventListener("scroll", handleScroll)
