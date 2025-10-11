@@ -1,10 +1,11 @@
 'use client';
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { MdSearch } from 'react-icons/md';
 
 export default function HeaderSearchBox() {
-  const [query, setQuery] = useState(null)
+  const searchParams = useSearchParams()
+  const [query, setQuery] = useState(searchParams.get('q') || null)
   const router = useRouter()
 
   useEffect(() => {
