@@ -35,8 +35,32 @@ export async function GET(request) {
     }
 
     const data = await response.json()
-    // Return the first result, which is the most likely match
-    return NextResponse.json(data.results?.[0] || null)
+    
+    if (!data.results || data.results.length === 0) {
+      return NextResponse.json(null)
+    }
+
+    // Find a result that closely matches the title and year
+    const matchedResult = data.results.find(result => {
+      const resultTitle = (result.title || result.name || '').toLowerCase()
+      
+      // return false early if title not match
+      if (resultTitle !== title.toLowerCase()) {
+        return false
+      }
+
+      // if year is provided, it must also match
+      if (year) {
+        const resultYear = (result.release_date || result.first_air_date || '').substring(0, 4)
+        return resultYear === year
+      }
+
+      // Title matches, and no year was provided
+      return true
+    })
+
+    // Return matched result, or null if no good match was found
+    return NextResponse.json(matchedResult || null)
   } catch (error) {
     console.error('Failed to fetch exact search from TMDB:', error)
     return NextResponse.json(
