@@ -40,7 +40,7 @@ export default async function Home() {
 	return (
 	<main className="max-w-7xl mx-auto px-8 py-8 md:py-8">
 
-		<section className="intro-section flex flex-col text-center bg-[#1f2937] rounded-xl py-20 px-8 mb-8" id="intro-section">
+		<section className="intro-section flex flex-col text-center rounded-xl py-20 px-8 mb-8" id="intro-section">
 			<h1 className="intro-title text-4xl font-bold text-white mb-4">Your One-Stop Website for All Things Cinema</h1>
 			<p className="intro-text text-xl text-[#9CA3AF] max-w-3xl mx-auto">
 				Explore a vast collection of movies and TV shows,
