@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import { IoMdSend } from 'react-icons/io';
+import Markdown from "react-markdown";
 
 export default function AskAIPage() {
   const [isLoading, setIsLoading] = useState(false)
@@ -53,7 +54,6 @@ export default function AskAIPage() {
       }
       setMessages((prev) => [...prev, botMessage])
       console.log(result.data)
-
     } catch(err) {
       const errorMessage = err instanceof Error ? err.message : 'An unknown error.'
       console.error("Failed to get response from AI", err)
@@ -72,10 +72,13 @@ export default function AskAIPage() {
   const messageElements = messages.map((message, index) => (
     <div
       key={index}
-      className={`py-2 px-3 backdrop-blur-xl max-w-xl rounded-xl ${message.role==="bot" ? "bg-gray-600/20 self-start rounded-bl-none" : "bg-blue-800/50 self-end rounded-br-none"}`}
-    >{message.content}</div>
+      className={`py-2 px-3 backdrop-blur-xl max-w-xl rounded-xl whitespace-pre-wrap ${message.role==="bot" ? "bg-gray-600/20 self-start rounded-bl-none" : "bg-blue-800/50 self-end rounded-br-none"}`}
+    >
+      <Markdown>{message.content}</Markdown>
+    </div>
   ))
   
+
   return (
   <main className="flex flex-col h-[calc(100vh-70px)] px-4 lg:px-52">
     <div className="flex items-baseline justify-center gap-4 mt-4 mb-4">
