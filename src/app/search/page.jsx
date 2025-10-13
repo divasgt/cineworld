@@ -44,7 +44,7 @@ export default function SearchPage() {
       (searchResults.length>0 && query) ? 
         <MediaContainer>
           {searchResults.map(item => (
-              <MediaCard key={item.id} item={item} isMovie={item.media_type==="movie"} layoutType="grid" />
+              <MediaCard key={item.id} item={item} isMovie={item.media_type==="movie"} layoutType="grid" showInfo={true} />
             ))
           }
         </MediaContainer>
