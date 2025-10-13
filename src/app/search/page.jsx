@@ -59,6 +59,8 @@ export default function SearchPage() {
 
 function Loading() {
   return (
-  <div className="loading mt-24 shimmer-text text-center font-semibold text-xl">Searching...</div>
+  <div className="mt-24 text-center font-semibold text-xl">
+    <span className="shimmer-text">Searching...</span>
+  </div>
   )
 }
