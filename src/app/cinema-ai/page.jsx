@@ -137,11 +137,11 @@ export default function AskAIPage() {
     </div>
 
     <div className="chat-window flex-1 w-full mx-auto rounded-2xl overflow-y-auto">
-      <div className="messages-container flex flex-col gap-3 px-8">
+      <div className="messages-container flex flex-col gap-3 px-4">
         {messageElements}
         {isLoading &&
-          <div className="py-2 px-3 backdrop-blur-xl max-w-xl rounded-xl bg-gray-600/20 self-start rounded-bl-none">
-            <div className="animate-pulse">I'm thinking...</div>
+          <div className="py-2 px-3 backdrop-blur-xl max-w-xl rounded-xl bg-gray-600/50 self-start rounded-bl-none animate-pulse">
+            <div>I'm thinking...</div>
           </div>
         }
       </div>
