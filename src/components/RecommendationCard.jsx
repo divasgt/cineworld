@@ -46,6 +46,7 @@ export default function RecommendationCard({ item }) {
           </span>
         </div>
         <p className="mt-2 text-sm text-gray-200">{item.reason}</p>
+        {!hasTmdbData && <span className="text-gray-400 text-xs mt-3 self-start hover:text-white duration-100 hover:underline underline-offset-2">Couldn't find it. Click to search for it ↗</span>}
       </div>
     </div>
     )
