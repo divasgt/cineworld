@@ -135,10 +135,10 @@ export default async function MediaDetailsPageComponent({type, id}) {
         <p className="max-w-3xl">{detailsData.overview}</p>
 
         {(uniqueDirectors.length > 0 || uniqueWriters.length > 0) && (
-          <div className="mt-1 flex  flex-col gap-1">
+          <div className="mt-1 flex gap-1 flex-wrap">
             
             {uniqueDirectors.length > 0 && (
-              <div className="flex gap-2">
+              <div className="flex gap-2 mr-2 min-w-40">
                 <span className="text-gray-500">Directors</span>
                 <span className="whitespace-nowrap overflow-hidden text-ellipsis min-w-0"
                   title={uniqueDirectors.join(', ')}
@@ -147,7 +147,7 @@ export default async function MediaDetailsPageComponent({type, id}) {
             )}
 
             {uniqueWriters.length > 0 && (
-              <div className="flex gap-2">
+              <div className="flex gap-2 min-w-40">
                 <span className="text-gray-500">Writers</span>
                 <span className="whitespace-nowrap overflow-hidden text-ellipsis min-w-0"
                   title={uniqueWriters.join(', ')}
