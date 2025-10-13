@@ -10,7 +10,7 @@ export default function RecommendationCard({ item }) {
 
   const posterPath = hasTmdbData
     ? `${IMAGE_BASE_URL}w342${item.tmdbData.poster_path}`
-    : PLACEHOLDER_IMAGE_URL(placeholderWidth, placeholderHeight)
+    : PLACEHOLDER_IMAGE_URL(placeholderWidth, placeholderHeight, undefined, "Data not found")
 
   const rating = (hasTmdbData && item.tmdbData.vote_average) ? 
     item.tmdbData.vote_average.toFixed(1)
@@ -22,7 +22,7 @@ export default function RecommendationCard({ item }) {
 
   function CardContent() {
     return (
-    <div className={`flex gap-4 p-3 rounded-lg bg-gray-600/20 backdrop-blur-xl w-full max-w-2xl ${!hasTmdbData ? "opacity-70" : ""}`}>
+    <div className="flex gap-4 p-2 rounded-lg bg-gray-600/50 backdrop-blur-xl max-w-2xl">
       <div className="shrink-0">
         <Image
           src={posterPath}
@@ -52,7 +52,7 @@ export default function RecommendationCard({ item }) {
   }
 
   return (
-    <Link href={linkPath} className="transition-transform hover:scale-105 duration-300 ease-in-out hover:shadow-lg hover:shadow-black/40 backdrop-blur-xl shadow">
+    <Link href={linkPath} className="w-[90%] transition-transform hover:scale-105 duration-300 ease-in-out hover:shadow-lg hover:shadow-black/40 backdrop-blur-xl shadow">
       <CardContent />
     </Link>
   )
