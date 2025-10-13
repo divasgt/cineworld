@@ -111,7 +111,8 @@ export default function AskAIPage() {
       return (
         <div key={index} className="flex flex-col gap-3 self-start">
           {message.content.map((item, itemIndex) => (
-            <RecommendationCard key={`${itemIndex}-${item.tmdbData?.id || item.title}`} item={item} />
+            // <RecommendationCard key={`${itemIndex}-${item.tmdbData?.id || item.title}`} item={item} />
+            <RecommendationCard key={`${itemIndex}`} item={item} />
           ))}
         </div>
       )
@@ -121,7 +122,7 @@ export default function AskAIPage() {
     return (
       <div
         key={index}
-        className={`py-2 px-3 backdrop-blur-xl max-w-xl rounded-xl whitespace-pre-wrap ${message.role==="bot" ? "bg-gray-600/20 self-start rounded-bl-none" : "bg-blue-800/50 self-end rounded-br-none"}`}
+        className={`py-2 px-3 backdrop-blur-xl max-w-xl rounded-xl whitespace-pre-wrap ${message.role==="bot" ? "bg-gray-600/50 self-start rounded-bl-none" : "bg-blue-800/80 self-end rounded-br-none"}`}
       >
         <Markdown>{message.content}</Markdown>
       </div>
@@ -131,8 +132,8 @@ export default function AskAIPage() {
 
   return (
   <main className="flex flex-col h-[calc(100vh-70px)] px-4 lg:px-52">
-    <div className="flex items-baseline justify-center gap-4 mt-4 mb-4">
-      <h1 className="text-2xl font-semibold inline-block border-b-2 border-red-600">Cinema AI</h1>
+    <div className="flex items-baseline justify-center gap-4 mt-4 mb-5">
+      <h1 className="text-3xl font-semibold inline-block">Cinema AI</h1>
     </div>
 
     <div className="chat-window flex-1 w-full mx-auto rounded-2xl overflow-y-auto">
@@ -147,24 +148,24 @@ export default function AskAIPage() {
       <div ref={messagesEndRef} />
     </div>
 
-    <form onSubmit={handleSubmit} className="flex gap-4 w-full max-w-2xl mx-auto py-4">
+    <form onSubmit={handleSubmit} className="flex gap-4 w-full max-w-2xl mx-auto pt-4 pb-5">
       <input
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}
         placeholder="Ask anything cinema"
-        className="bg-gray-800/30 backdrop-blur-2xl border border-white/10 rounded-xl px-6 py-2.25 flex-1 outline-none focus:border-white/30 "
+        className="bg-gray-700/40 backdrop-blur-2xl border border-white/10 rounded-xl px-6 py-2.25 flex-1 outline-none focus:border-neutral-300/30 "
       />
       <button
         type="submit"
-        className="text-sm text-white cursor-pointer px-3.5 py-1.25 bg-gray-500/40 backdrop-blur-2xl border border-white/10 hover:bg-gray-700/70 rounded-xl transition disabled:opacity-60 disabled:cursor-not-allowed"
+        className="text-sm text-white cursor-pointer px-3.5 py-1.25 bg-orange-700/80 backdrop-blur-2xl border border-white/10 hover:bg-orange-700 rounded-xl transition disabled:opacity-60 disabled:cursor-not-allowed"
         disabled={isLoading || !input.trim()}
         title="Send"
       >
         {isLoading ?
           <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
           // : "Send"
-          : <IoMdSend className="w-5 h-5"/>
+          : <IoMdSend className="w-5 h-5 -mr-0.5"/>
         }
       </button>
     </form>

@@ -29,7 +29,7 @@ body {
 /* Seen from https://www.perplexity.ai/browser/invite-ga , https://pplx-next-static-public.perplexity.ai/_spa-aux/assets/index-OD9rz7ah.css*/
 
 /* Generic Shimmer Animation */
-.shimmer {
+.shimmer-text {
   /* display: inline-block; */
   /* position: relative; */
   background: linear-gradient(
@@ -53,6 +53,38 @@ body {
   }
   100% {
     background-position: -200% 0;
+  }
+}
+
+.shimmer-btn {
+  position: relative; /* Needed for absolute positioning of pseudo-element */
+  overflow: hidden; /* Hides the shimmer when it's outside the button */
+  /* The actual background gradient will be applied directly to the button element */
+}
+
+.shimmer-btn::after { /* Using ::after for the overlay */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -50%; /* Start off-screen to the left */
+  width: 50%; /* Width of the shimmer bar */
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4), /* White shimmer */
+    transparent
+  );
+  transform: skewX(-20deg); /* Slanted effect */
+  animation: shimmer-overlay 1.5s infinite linear; /* Faster animation for overlay */
+}
+
+@keyframes shimmer-overlay {
+  0% {
+    left: -50%; /* Start the shimmer bar completely off to the left */
+  }
+  100% {
+    left: 150%; /* Move the shimmer bar completely off to the right */
   }
 }
 

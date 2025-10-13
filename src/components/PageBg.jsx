@@ -2,9 +2,9 @@ export default function PageBg() {
   // from https://patterncraft.fun
   
 
-  // style for parent div: min-h-screen bg-black fixed -z-1 top-0 right-0 bottom-0 left-0
+  // style for parent div:bg-black fixed -z-1 top-0 right-0 bottom-0 left-0
 //   return (
-//   <div className="min-h-screen bg-black fixed -z-1 top-0 right-0 bottom-0 left-0">
+//   <div className="bg-black fixed -z-1 top-0 right-0 bottom-0 left-0">
 //   {/* Cosmic Noise */}
 //   <div
 //     className="absolute inset-0 z-0"
@@ -17,7 +17,7 @@ export default function PageBg() {
 //   )
 
   return (
-  <div className="min-h-screen bg-black fixed -z-1 top-0 right-0 bottom-0 left-0">
+  <div className="bg-black fixed -z-1 top-0 right-0 bottom-0 left-0">
     {/* Dark Horizon Glow */}
     <div
       className="absolute inset-0 z-0"

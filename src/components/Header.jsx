@@ -22,13 +22,13 @@ export default function Header() {
   }, [])
   
   return (
-  <header className={`header fixed text-gray-400 font-medium flex top-0 w-screen items-center px-9 py-3.5 justify-between z-1000 ${
-    scrolled ? "bg-gray-900/50 backdrop-blur-md border-b border-gray-500/20" : "bg-transparent border-none"
+  <header className={`header fixed text-gray-400 font-medium flex top-0 w-screen items-center px-9 py-2.5 justify-between z-1000 ${
+    scrolled ? "bg-gray-900/50 backdrop-blur-xl border-b border-gray-500/10" : "bg-transparent border-none"
   }`}>
 
     <div className="header-left shrink-0">
       <nav className="nav-links flex gap-5 items-center shrink-0">
-        <Link href="/" className="logo text-red-600 text-2xl tracking-tighter font-bold mr-2 transition">CineWorld</Link>
+        <Link href="/" className="logo text-2xl tracking-tighter font-bold mr-2 bg-gradient-to-r from-red-500 to-orange-800 bg-clip-text text-transparent">CineWorld</Link>
         <Link href="/#intro-section" className="hover:text-white transition">Home</Link>
         <Link href="/#latest-movies" className="hover:text-white transition">Movies</Link>
         <Link href="/#latest-tv-shows" className="hover:text-white transition">TV Shows</Link>
@@ -39,12 +39,11 @@ export default function Header() {
 
     <div className="header-right flex items-center gap-5 shrink-0">
       <Link href="/mood-recommend">
-        <HeaderButton>Mood Recommend</HeaderButton>
+        <HeaderButton className="bg-gradient-to-r from-orange-700 to-red-800 transition-all duration-200 transform hover:scale-105">Mood Recommend</HeaderButton>
       </Link>
 
       <Link href="/cinema-ai">
-        <HeaderButton className="bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-300 
-  transform hover:scale-105">Ask AI</HeaderButton>
+        <HeaderButton className="bg-gradient-to-r from-orange-700 to-red-800 transition-all duration-200 transform hover:scale-105">Cinema AI</HeaderButton>
       </Link>
 
       <Link href="/watchlist">

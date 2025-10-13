@@ -2,7 +2,7 @@ import { twMerge } from "tailwind-merge";
 
 export default function HeaderButton({children, className}) {
   return (
-  <button className={twMerge('text-sm text-white cursor-pointer px-3.5 py-1.25 bg-red-600 hover:bg-red-500 rounded-md transition', className)}>
+  <button className={twMerge('text-sm text-white cursor-pointer px-3.5 py-1.25 rounded-md transition', className)}>
     {children}
   </button>
   )
