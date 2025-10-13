@@ -62,7 +62,7 @@ export default async function MediaDetailsPageComponent({type, id}) {
   const uniqueWriters = [...new Set(writers)]
 
   return (
-  <div className="py-10 px-12 md:px-24 z-0">
+  <div className="py-5 px-6 md:py-8 md:px-12 lg:py-10 lg:px-24 xl:py-12 xl:px-32 z-0">
     <ScrollToTop />
     {detailsData.backdrop_path ? 
       <div className="fixed z-[-1] top-0 right-0 bottom-0 left-0 blur-3xl">
@@ -135,21 +135,21 @@ export default async function MediaDetailsPageComponent({type, id}) {
         <p className="max-w-3xl">{detailsData.overview}</p>
 
         {(uniqueDirectors.length > 0 || uniqueWriters.length > 0) && (
-          <div className="mt-1 flex gap-12">
+          <div className="mt-1 flex  flex-col gap-1">
             
             {uniqueDirectors.length > 0 && (
-              <div className="flex gap-2 min-w-0">
-                <span className="text-gray-500">Directors </span>
-                <span className="whitespace-nowrap overflow-hidden text-ellipsis"
+              <div className="flex gap-2">
+                <span className="text-gray-500">Directors</span>
+                <span className="whitespace-nowrap overflow-hidden text-ellipsis min-w-0"
                   title={uniqueDirectors.join(', ')}
                 >{uniqueDirectors.join(', ')}</span>
               </div>
             )}
 
             {uniqueWriters.length > 0 && (
-              <div className="flex gap-2 min-w-0">
+              <div className="flex gap-2">
                 <span className="text-gray-500">Writers</span>
-                <span className="whitespace-nowrap overflow-hidden text-ellipsis"
+                <span className="whitespace-nowrap overflow-hidden text-ellipsis min-w-0"
                   title={uniqueWriters.join(', ')}
                 >{uniqueWriters.join(', ')}</span>
               </div>
