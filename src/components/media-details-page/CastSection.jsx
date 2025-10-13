@@ -24,9 +24,11 @@ export default function CastSection({data}) {
             width={160}
             unoptimized={!item.profile_path}
           />
-          <div className='p-3'>
-            <p className='font-medium'>{item.name}</p>
-            <p className='text-gray-400 text-wrap font-light text-sm'>{item.character}</p>
+          <div className='p-3 *:overflow-hidden *:line-clamp-2'>
+            <p className='font-medium' title={item.name}>
+              {item.name}</p>
+            <p className='text-gray-400 text-wrap font-light text-sm' title=''>
+              {item.character}</p>
           </div>
         </div>
       ))}
