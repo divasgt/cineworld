@@ -55,11 +55,13 @@ export default async function MediaDetailsPageComponent({type, id}) {
 
   const uniqueDirectors = [...new Set(directors)]
 
-  const writers = detailsData.credits?.crew?.filter((crewMember) =>
-    ['Writer', 'Screenplay', 'Story', 'Teleplay'].includes(crewMember.job)
-  ).map(writer => writer.name)
+  const writersOrCreators = type === 'tv'
+    ? detailsData.created_by?.map(creator => creator.name) || []
+    : detailsData.credits?.crew?.filter((crewMember) =>
+        ['Writer', 'Screenplay', 'Story', 'Teleplay'].includes(crewMember.job)
+      ).map(writer => writer.name) || [];
 
-  const uniqueWriters = [...new Set(writers)]
+  const uniqueWritersOrCreators = [...new Set(writersOrCreators)];
 
   return (
   <div className="py-5 px-6 md:py-8 md:px-12 lg:py-10 lg:px-24 xl:py-12 xl:px-32 z-0">
@@ -134,7 +136,7 @@ export default async function MediaDetailsPageComponent({type, id}) {
         {/* <h2 className="text-2xl font-semibold mt-4 text-white">Overview</h2> */}
         <p className="max-w-3xl">{detailsData.overview}</p>
 
-        {(uniqueDirectors.length > 0 || uniqueWriters.length > 0) && (
+        {(uniqueDirectors.length > 0 || uniqueWritersOrCreators.length > 0) && (
           <div className="mt-1 flex gap-1 flex-wrap">
             
             {uniqueDirectors.length > 0 && (
@@ -146,12 +148,12 @@ export default async function MediaDetailsPageComponent({type, id}) {
               </div>
             )}
 
-            {uniqueWriters.length > 0 && (
+            {uniqueWritersOrCreators.length > 0 && (
               <div className="flex gap-2 min-w-40">
-                <span className="text-gray-500">Writers</span>
+                <span className="text-gray-500">{type==="tv" ? "Creators" : "Writers"}</span>
                 <span className="whitespace-nowrap overflow-hidden text-ellipsis min-w-0"
-                  title={uniqueWriters.join(', ')}
-                >{uniqueWriters.join(', ')}</span>
+                  title={uniqueWritersOrCreators.join(', ')}
+                >{uniqueWritersOrCreators.join(', ')}</span>
               </div>
             )}
           </div>
