@@ -38,7 +38,7 @@ export default async function Home() {
 	}
 
 	return (
-	<main className="max-w-7xl mx-auto px-8 py-8 md:py-8">
+	<main className="w-full mx-auto px-10 py-8 md:py-8">
 
 		<section className="intro-section flex flex-col text-center rounded-xl py-20 px-8 mb-8" id="intro-section">
 			<h1 className="intro-title text-4xl font-bold text-white mb-4">Your One-Stop Website for All Things Cinema</h1>
