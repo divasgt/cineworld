@@ -49,6 +49,18 @@ export default async function MediaDetailsPageComponent({type, id}) {
     : `${detailsData.number_of_seasons} Season${detailsData.number_of_seasons > 1 ? 's' : ''}`
   const typeLabel = type === 'movie' ? 'Movie' : 'TV Show'  
   
+  const directors = detailsData.credits?.crew?.filter((crewMember) => 
+    crewMember.job === 'Director'
+  ).map(director => director.name)
+
+  const uniqueDirectors = [...new Set(directors)]
+
+  const writers = detailsData.credits?.crew?.filter((crewMember) =>
+    ['Writer', 'Screenplay', 'Story', 'Teleplay'].includes(crewMember.job)
+  ).map(writer => writer.name)
+
+  const uniqueWriters = [...new Set(writers)]
+
   return (
   <div className="py-10 px-12 md:px-24 z-0">
     <ScrollToTop />
@@ -83,7 +95,7 @@ export default async function MediaDetailsPageComponent({type, id}) {
         />
       </div>
 
-      <div className="flex flex-col gap-5 self-start">
+      <div className="flex flex-col gap-5 self-start min-w-0"> {/* Add min-w-0 here */}
         <h1 className="text-[48px] font-bold text-white leading-tight ml-[-3px]">{detailsData.name || detailsData.title} ({releaseYear})</h1>
 
         <div className="flex items-center gap-4 text-gray-400 font-medium flex-wrap mb-2">
@@ -122,6 +134,28 @@ export default async function MediaDetailsPageComponent({type, id}) {
         {/* <h2 className="text-2xl font-semibold mt-4 text-white">Overview</h2> */}
         <p className="max-w-3xl">{detailsData.overview}</p>
 
+        {(uniqueDirectors.length > 0 || uniqueWriters.length > 0) && (
+          <div className="mt-1 flex gap-12">
+            
+            {uniqueDirectors.length > 0 && (
+              <div className="flex gap-2 min-w-0">
+                <span className="text-gray-500">Directors </span>
+                <span className="whitespace-nowrap overflow-hidden text-ellipsis"
+                  title={uniqueDirectors.join(', ')}
+                >{uniqueDirectors.join(', ')}</span>
+              </div>
+            )}
+
+            {uniqueWriters.length > 0 && (
+              <div className="flex gap-2 min-w-0">
+                <span className="text-gray-500">Writers</span>
+                <span className="whitespace-nowrap overflow-hidden text-ellipsis"
+                  title={uniqueWriters.join(', ')}
+                >{uniqueWriters.join(', ')}</span>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
 
