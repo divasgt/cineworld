@@ -42,6 +42,7 @@ export default async function MediaDetailsPageComponent({type, id}) {
     throw err // For other errors, the nearest error.jsx page will be shown
   }
   
+  const name = detailsData.name || detailsData.title
   const releaseYear = (detailsData.release_date || detailsData.first_air_date || '').slice(0, 4)
   const ageRating = getAgeRating(detailsData, type)
   const lengthOrSeasons = type === 'movie'
@@ -98,8 +99,9 @@ export default async function MediaDetailsPageComponent({type, id}) {
       </div>
 
       <div className="flex flex-col gap-5 self-start min-w-0"> {/* Add min-w-0 here */}
-        <h1 className="text-[48px] font-bold text-white leading-tight ml-[-3px]">{detailsData.name || detailsData.title} ({releaseYear})</h1>
-
+        <h1 className="text-[48px] font-bold text-white leading-tight ml-[-3px]">{name} ({releaseYear})</h1>
+        
+        {/* Info: type, star rating, length, age rating */}
         <div className="flex items-center gap-4 text-gray-400 font-medium flex-wrap mb-2">
           <span className="text-red-600 mr-4">{typeLabel}</span>
           <span className="flex gap-2 items-center">
@@ -122,12 +124,14 @@ export default async function MediaDetailsPageComponent({type, id}) {
           {/* <span className="text-sm text-gray-500">({detailsData.vote_count.toLocaleString()} votes)</span> */}
         {/* </div> */}
 
+
         <div className="flex gap-4 flex-wrap mt-4 mb-3">
           <TrailerBtn />
-          <WatchlistBtn />
+          <WatchlistBtn tmdbId={id} title={name} type={type} year={releaseYear} posterPath={detailsData.poster_path || null} />
           <AskAIBtn />
         </div>
         
+
         <span className="mb-6">
           <WatchProviders providers={detailsData['watch/providers']?.results?.IN}/>
         </span>
