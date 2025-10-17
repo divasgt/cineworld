@@ -136,7 +136,7 @@ export default async function MediaDetailsPageComponent({type, id}) {
           <WatchProviders providers={detailsData['watch/providers']?.results?.IN}/>
         </span>
 
-        {detailsData.tagline ? <p className="italic text-gray-300 -mb-2">"{detailsData.tagline}"</p> : null}
+        {/* {detailsData.tagline ? <p className="italic text-gray-300 -mb-4">"{detailsData.tagline}"</p> : null} */}
         {/* <h2 className="text-2xl font-semibold mt-4 text-white">Overview</h2> */}
         <p className="max-w-3xl">{detailsData.overview}</p>
 
