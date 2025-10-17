@@ -10,11 +10,11 @@ export default function CastSection({data}) {
   <div className='mt-16'>
     <h2 className='text-2xl mb-5 border-b-2 border-b-red-500 inline-block pb-2'>Top Cast</h2>
 
-    <div className='flex gap-5 overflow-x-auto p-4 -m-4'>
+    <div className='flex gap-3 md:gap-5 overflow-x-auto p-4 -m-4'>
       {castData.map(item => (
-        <div key={item.id} className='flex flex-col shrink-0 w-40 rounded-lg overflow-hidden bg-gray-600/20 transition-transform duration-300 ease-in-out hover:scale-105 shadow hover:shadow-lg hover:shadow-black/40 backdrop-blur-xl'>
+        <div key={item.id} className='flex flex-col shrink-0 w-28 md:w-40 rounded-lg overflow-hidden bg-gray-600/20 transition-transform duration-300 ease-in-out hover:scale-105 shadow hover:shadow-lg hover:shadow-black/40 backdrop-blur-xl'>
           <Image
-            className='w-full h-[240px] object-cover'
+            className='w-full h-[168px] md:h-[240px] object-cover'
             src={
               item.profile_path
                 ? `${IMAGE_BASE_URL}original${item.profile_path}`
