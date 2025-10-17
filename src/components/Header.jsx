@@ -22,25 +22,25 @@ export default function Header() {
   }, [])
   
   return (
-  <header className={`header fixed text-gray-400 font-medium flex top-0 w-screen items-center px-9 py-2.5 justify-between z-1000 ${
-    scrolled ? "bg-gray-900/50 backdrop-blur-xl border-b border-gray-500/10" : "bg-transparent border-none"
+  <header className={`header fixed text-gray-400 font-medium flex justify-between top-0 w-screen items-center px-9 py-2.5 z-1000 ${
+    scrolled ? "bg-gray-900/70 backdrop-blur-xl border-b border-gray-500/10" : "bg-transparent border-none"
   }`}>
 
     <div className="header-left shrink-0">
-      <nav className="nav-links flex gap-5 items-center shrink-0">
+      <nav className="nav-links flex gap-5 items-center shrink-0 mr-8">
         <Link href="/" className="logo text-2xl tracking-tighter font-bold mr-2 bg-gradient-to-r from-red-500 to-orange-800 bg-clip-text text-transparent">CineWorld</Link>
         <Link href="/#intro-section" className="hover:text-white transition">Home</Link>
-        <Link href="/#latest-movies" className="hover:text-white transition">Movies</Link>
-        <Link href="/#latest-tv-shows" className="hover:text-white transition">TV Shows</Link>
+        <Link href="/#latestMovies" className="hover:text-white transition">Movies</Link>
+        <Link href="/#latestTVShows" className="hover:text-white transition">TV Shows</Link>
       </nav>
     </div>
 
-    <HeaderSearchBox />
 
-    <div className="header-right flex items-center gap-5 shrink-0">
-      <Link href="/mood-recommend">
+    <div className="header-right flex items-center gap-5 flex-grow justify-end *:text-nowrap">
+      <HeaderSearchBox />
+      {/* <Link href="/mood-recommend">
         <HeaderButton className="bg-gradient-to-r from-orange-700 to-red-800 transition-all duration-200 transform hover:scale-105">Mood Recommend</HeaderButton>
-      </Link>
+      </Link> */}
 
       <Link href="/cinema-ai">
         <HeaderButton className="bg-gradient-to-r from-orange-700 to-red-800 transition-all duration-200 transform hover:scale-105">Cinema AI</HeaderButton>
