@@ -84,7 +84,7 @@ export default async function MediaDetailsPageComponent({type, id}) {
 
     <div id="detailsContainer" className="grid grid-cols-1 md:grid-cols-[350px_1fr] gap-10 relative text-gray-300">
 
-      <div className="rounded-lg overflow-hidden shadow-lg self-start md:max-w-full max-w-[300px]">
+      <div className="rounded-lg overflow-hidden shadow-lg self-start md:max-w-full max-w-50">
         <Image
           className="w-full h-full object-cover"
           src={detailsData.poster_path ?
@@ -98,14 +98,14 @@ export default async function MediaDetailsPageComponent({type, id}) {
         />
       </div>
 
-      <div className="flex flex-col gap-5 self-start min-w-0"> {/* Add min-w-0 here */}
-        <h1 className="text-[48px] font-bold text-white leading-tight ml-[-3px]">{name} ({releaseYear})</h1>
+      <div className="flex flex-col gap-3 md:gap-5 self-start min-w-0"> {/* Add min-w-0 here */}
+        <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight ml-[-3px]">{name} ({releaseYear})</h1>
         
         {/* Info: type, star rating, length, age rating */}
-        <div className="flex items-center gap-4 text-gray-400 font-medium flex-wrap mb-2">
-          <span className="text-red-600 mr-4">{typeLabel}</span>
-          <span className="flex gap-2 items-center">
-            <MdStar className="text-amber-500 text-2xl mb-0.5" />
+        <div className="flex items-center text-[16px] md:text-lg gap-2 md:gap-4 text-gray-400 font-medium flex-wrap mb-2 ml-1">
+          <span className="text-red-600">{typeLabel}</span> • 
+          <span className="flex gap-1.5 items-center">
+            <MdStar className="text-amber-500 size-6 mb-0.5" />
             <span className="text-md  tracking-wide">{detailsData.vote_average.toFixed(1)}</span>
           </span> • 
           <span>{lengthOrSeasons}</span> • 
@@ -125,7 +125,7 @@ export default async function MediaDetailsPageComponent({type, id}) {
         {/* </div> */}
 
 
-        <div className="flex gap-4 flex-wrap mt-4 mb-3">
+        <div className="flex self-start gap-4 flex-wrap mt-4 mb-3">
           <TrailerBtn />
           <WatchlistBtn tmdbId={id} title={name} type={type} year={releaseYear} posterPath={detailsData.poster_path || null} />
           <AskAIBtn />
@@ -141,7 +141,7 @@ export default async function MediaDetailsPageComponent({type, id}) {
         <p className="max-w-3xl">{detailsData.overview}</p>
 
         {(uniqueDirectors.length > 0 || uniqueWritersOrCreators.length > 0) && (
-          <div className="mt-1 flex gap-1 flex-wrap">
+          <div className="mt-1 flex gap-1 md:gap-5 flex-wrap">
             
             {uniqueDirectors.length > 0 && (
               <div className="flex gap-2 mr-2 min-w-40">
