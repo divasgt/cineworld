@@ -1,6 +1,5 @@
 import { IMAGE_BASE_URL, PLACEHOLDER_IMAGE_URL } from "@/utils/constants";
 import Image from "next/image";
-import { twMerge } from "tailwind-merge";
 import Link from "next/link";
 
 // Modified to Handle when item object is passed, or (for watchlist items) when instead tmdbId, title, releaseYear, posterPath are passed.
@@ -44,10 +43,7 @@ export default function MediaCard({
   return (
   <Link
     href={linkPath}
-    className={twMerge(
-      'rounded-lg overflow-hidden bg-gray-600/20 transition-transform duration-300 ease-in-out cursor-pointer hover:scale-105 hover:shadow-lg hover:shadow-black/40 backdrop-blur-xl shadow relative group',
-      layoutType === 'horizontal' && 'shrink-0 w-[200px]'
-    )}
+    className='rounded-lg overflow-hidden bg-gray-600/20 transition-transform duration-300 ease-in-out cursor-pointer hover:scale-105 hover:shadow-lg hover:shadow-black/40 backdrop-blur-xl shadow relative group'
   >
     <Image
       src={posterPathUsed}
