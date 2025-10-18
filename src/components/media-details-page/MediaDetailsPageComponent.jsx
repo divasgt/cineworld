@@ -64,6 +64,9 @@ export default async function MediaDetailsPageComponent({type, id}) {
 
   const uniqueWritersOrCreators = [...new Set(writersOrCreators)];
 
+  const trailer = detailsData.videos.results.find(v => v.type==='Trailer' && v.site==='YouTube')
+
+
   return (
   <div className="py-5 px-6 md:py-8 md:px-12 lg:py-10 lg:px-24 xl:py-12 xl:px-32 z-0">
     <ScrollToTop />
@@ -126,9 +129,9 @@ export default async function MediaDetailsPageComponent({type, id}) {
 
 
         <div className="flex self-start gap-4 flex-wrap mt-4 mb-3">
-          <TrailerBtn />
+          <TrailerBtn trailer={trailer} />
           <WatchlistBtn tmdbId={id} title={name} type={type} year={releaseYear} posterPath={detailsData.poster_path || null} />
-          <AskAIBtn />
+          {/* <AskAIBtn onClick={() => setShowAIChat(true)} /> */}
         </div>
         
 
