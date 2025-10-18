@@ -38,9 +38,8 @@ export default async function Home() {
 	}
 
 	return (
-	<main className="w-full mx-auto px-5 md:px-10 py-8">
-
-		<section className="intro-section flex flex-col text-center rounded-xl py-10 md:py-20 md:px-8 mb-8" id="intro-section">
+	<main className="w-full mx-auto px-5 md:px-10 py-8 *:scroll-mt-20">
+		<section id="intro-section" className="intro-section flex flex-col text-center rounded-xl py-10 md:py-20 md:px-8 mb-8">
 			<h1 className="intro-title text-2xl md:text-4xl font-bold text-white mb-4">Your One-Stop Website for All Things Cinema</h1>
 			<p className="intro-text text-lg md:text-xl text-[#9CA3AF] max-w-3xl mx-auto">
 				Explore a vast collection of movies and TV shows,
@@ -48,9 +47,9 @@ export default async function Home() {
 			</p>
 		</section>
 
-		<section className="my-14">
+		<section id="latestMovies" className="my-14">
 			<H2ForSection title="Latest Movies" />	
-			<MediaContainer id="latestMovies">
+			<MediaContainer>
 				{latestMoviesData.map((item) => (
 					<MediaCard key={item.id} item={item} isMovie={true} layoutType="grid" />
 				))
@@ -58,9 +57,9 @@ export default async function Home() {
 			</MediaContainer>
 		</section>
 
-		<section className="my-14">
+		<section id="latestTVShows" className="my-14">
 			<H2ForSection title="Latest TV Shows" />
-			<MediaContainer id="latestTVShows">
+			<MediaContainer>
 				{latestTVShowsData.map((item) => (
 					<MediaCard key={item.id} item={item} isMovie={false} layoutType="grid" />
 				))
@@ -68,9 +67,9 @@ export default async function Home() {
 			</MediaContainer>
 		</section>
 
-		<section className="my-14">
+		<section id="topMovies" className="my-14">
 			<H2ForSection title="Top Rated Movies" />
-			<MediaContainer id="topMovies" type="horizontal-container">
+			<MediaContainer type="horizontal-container">
 				{topMoviesData.map((item) => (
 					<MediaCard key={item.id} item={item} isMovie={true} layoutType="horizontal" />
 				))
@@ -78,9 +77,9 @@ export default async function Home() {
 			</MediaContainer>
 		</section>
 
-		<section className="my-14">
+		<section id="topTVShows" className="my-14">
 			<H2ForSection title="Top Rated TV Shows" />
-			<MediaContainer id="topTVShows" type="horizontal-container">
+			<MediaContainer type="horizontal-container">
 				{topTVShowsData.map((item) => (
 					<MediaCard key={item.id} item={item} isMovie={false} layoutType="horizontal" />
 				))
