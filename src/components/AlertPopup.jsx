@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { MdClose } from "react-icons/md"
 import { twMerge } from "tailwind-merge"
 
-export default function AlertPopup({message, duration=2000, className}) {
+export default function AlertPopup({message, duration=2000, className=""}) {
   const [showAlert, setShowAlert] = useState(false)
 
   useEffect(() => {

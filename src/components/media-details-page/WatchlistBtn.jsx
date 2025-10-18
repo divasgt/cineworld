@@ -88,7 +88,6 @@ export default function WatchlistBtn({tmdbId, title, type, year, posterPath}) {
       }
     </button>
 
-    {/* Render the AlertPopup with message */}
     <AlertPopup message={alertMessage} />
   </>
   )
