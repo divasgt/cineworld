@@ -3,7 +3,7 @@ export function MediaContainer({id="", type="grid-container", children}) {
   return (
   <>
     {type==="grid-container" && 
-      <div id={id} className="grid-container grid grid-cols-2 gap-4 pb-4 md:grid-cols-4 md:gap-4 lg:grid-cols-6 lg:gap-5">
+      <div id={id} className="grid-container grid grid-cols-3 gap-4 pb-4 md:grid-cols-4 md:gap-4 lg:grid-cols-6 lg:gap-5">
         {children}
       </div>
     }
