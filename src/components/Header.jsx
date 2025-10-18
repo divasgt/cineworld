@@ -2,11 +2,19 @@
 import Link from "next/link";
 import HeaderButton from "./HeaderButton";
 import HeaderSearchBox from "./HeaderSearchBox";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { MdArrowDropDown } from "react-icons/md";
+import { MdSearch } from 'react-icons/md';
+import { BsThreeDotsVertical } from 'react-icons/bs';
+import HeaderAuthSection from "./HeaderAuthSection";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
-
+  const [isBrowseOpen, setIsBrowseOpen] = useState(false)
+  const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false)
+  const [isMoreMenuOpen, setIsMoreMenuOpen] = useState(false)
+  const mobileSearchInputRef = useRef(null)
+  
   useEffect(() => {
     function handleScroll() {
       // check if scroll vertical position > 40px
@@ -21,48 +29,114 @@ export default function Header() {
     }
   }, [])
   
+  useEffect(() => {
+    if (isMobileSearchOpen && mobileSearchInputRef.current) {
+      mobileSearchInputRef.current.focus()
+    }
+  }, [isMobileSearchOpen])
+  
   return (
-  <header className={`header fixed text-gray-400 font-medium flex justify-between top-0 w-screen items-center px-9 py-2.5 z-1000 ${
+  <header className={`header fixed text-gray-400 font-medium flex justify-between top-0 w-screen items-center px-4 sm:px-9 py-2.5 z-1000 ${
     scrolled ? "bg-gray-900/70 backdrop-blur-xl border-b border-gray-500/10" : "bg-transparent border-none"
   }`}>
 
     <div className="header-left shrink-0">
       <nav className="nav-links flex gap-5 items-center shrink-0 mr-8">
         <Link href="/" className="logo text-2xl tracking-tighter font-bold mr-2 bg-gradient-to-r from-red-500 to-orange-800 bg-clip-text text-transparent">CineWorld</Link>
-        <Link href="/#intro-section" className="hover:text-white transition">Home</Link>
-        <Link href="/#latestMovies" className="hover:text-white transition">Movies</Link>
-        <Link href="/#latestTVShows" className="hover:text-white transition">TV Shows</Link>
+        
+        {/* Links for lg screens */}
+        <div className="hidden lg:flex gap-5 items-center">
+          <Link href="/#intro-section" className="hover:text-white transition">Home</Link>
+          <Link href="/#latestMovies" className="hover:text-white transition">Movies</Link>
+          <Link href="/#latestTVShows" className="hover:text-white transition">TV Shows</Link>
+        </div>
+
+        {/* Browse dropdown for sm screens */}
+        <div className="relative lg:hidden">
+          <button
+            onClick={() => setIsBrowseOpen(!isBrowseOpen)}
+            onBlur={() => setTimeout(() => setIsBrowseOpen(false), 150)}
+            className={`hover:text-white transition-all flex items-center cursor-pointer ${isBrowseOpen && "text-white"}`}
+          >
+            Browse
+            <MdArrowDropDown className="size-5" />
+          </button>
+
+          <div className={`absolute top-full left-0 mt-2 bg-gray-800/90 backdrop-blur-xl rounded-md shadow-lg w-40 z-10 border border-gray-500/10 overflow-hidden transition-all ${isBrowseOpen ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-95 invisible'}`}>
+            <Link href="/#intro-section" className="block px-4 py-2 text-sm hover:bg-gray-700 hover:text-white" onClick={() => setIsBrowseOpen(false)}>Home</Link>
+            <Link href="/#latestMovies" className="block px-4 py-2 text-sm hover:bg-gray-700 hover:text-white" onClick={() => setIsBrowseOpen(false)}>Movies</Link>
+            <Link href="/#latestTVShows" className="block px-4 py-2 text-sm hover:bg-gray-700 hover:text-white" onClick={() => setIsBrowseOpen(false)}>TV Shows</Link>
+          </div>
+        </div>
       </nav>
     </div>
 
 
-    <div className="header-right flex items-center gap-5 flex-grow justify-end *:text-nowrap">
-      <HeaderSearchBox />
-      {/* <Link href="/mood-recommend">
-        <HeaderButton className="bg-gradient-to-r from-orange-700 to-red-800 transition-all duration-200 transform hover:scale-105">Mood Recommend</HeaderButton>
-      </Link> */}
+    <div className="header-right flex items-center gap-3 sm:gap-5 flex-grow justify-end *:text-nowrap">
+      {/* Search bar for lg screens */}
+      <div className="hidden lg:flex flex-grow justify-end">
+        <HeaderSearchBox />
+      </div>
 
-      <Link href="/cinema-ai">
-        <HeaderButton className="bg-gradient-to-r from-orange-700 to-red-800 transition-all duration-200 transform hover:scale-105">Cinema AI</HeaderButton>
-      </Link>
+      {/* Search icon for <lg screens */}
+      <button
+        onClick={() => setIsMobileSearchOpen(true)}
+        className="lg:hidden text-white p-1.5 cursor-pointer"
+      >
+        <MdSearch className="size-5" />
+      </button>
 
-      <Link href="/watchlist">
-        <HeaderButton className="bg-gray-700 hover:bg-gray-600"> Watchlist</HeaderButton>
-      </Link>
+      {/* Links for medium/large screens */}
+      <div className="hidden md:flex items-center gap-5">
+        <Link href="/cinema-ai">
+          <HeaderButton className="bg-gradient-to-r from-orange-700 to-red-800 transition-all duration-200 transform hover:scale-105">Cinema AI</HeaderButton>
+        </Link>
 
-      <div className="profile-icon flex relative text-white font-light" id="profileIcon">
-        <button className="profile-button cursor-pointer size-8 bg-gray-700 hover:bg-gray-600 rounded-full flex items-center justify-center">
-          <span className="initial">M</span>
+        <Link href="/watchlist">
+          <HeaderButton className="bg-gray-700 hover:bg-gray-600"> Watchlist</HeaderButton>
+        </Link>
+
+        <HeaderAuthSection />
+      </div>
+
+      {/* More dropdown for small screens */}
+      <div className="relative md:hidden">
+        <button 
+          onClick={() => setIsMoreMenuOpen(!isMoreMenuOpen)}
+          onBlur={() => setTimeout(() => setIsMoreMenuOpen(false), 200)}
+          className="text-white p-1.5 cursor-pointer"
+        >
+          <BsThreeDotsVertical className="size-5" />
         </button>
 
-        {/* <div className="profile-dropdown absolute top-full right-0 mt-2 bg-gray-700 rounded-md shadow-[0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)] overflow-hidden w-30  flex flex-col justify-center z-50 hidden" id="profileDropdown">
-          <Link id="profile-Link" href="#" className="block py-1.5 px-4 text-sm hover:bg-gray-600">Profile</Link>
-          <Link href="#" className="block py-1.5 px-4 text-sm hover:bg-gray-600">Settings</Link>
-          <Link href="#" className="block py-1.5 px-4 text-sm hover:bg-gray-600">Logout</Link>
-        </div> */}
+        <div className={`absolute top-full right-0 mt-2 bg-gray-800/90 backdrop-blur-xl rounded-md shadow-lg w-32 z-10 border border-gray-500/10 overflow-hidden transition-all ${isMoreMenuOpen ? "opacity-100 scale-100 visible" : "opacity-0 scale-95 invisible"}`}>
+          <Link href="/cinema-ai" className="block px-4 py-2 text-sm hover:bg-gray-700 hover:text-white" onClick={() => setIsMoreMenuOpen(false)}>Cinema AI</Link>
+
+          <Link href="/watchlist" className="block px-4 py-2 text-sm hover:bg-gray-700 hover:text-white" onClick={() => setIsMoreMenuOpen(false)}>Watchlist</Link>
+
+          <div className="border-t border-gray-500/20 mb-1"></div>
+
+          <div className="px-4 py-2">
+            <HeaderAuthSection />
+          </div>
+        </div>
       </div>
     </div>
 
+    {/* Mobile Search Overlay */}
+    {isMobileSearchOpen && (
+      <div
+        className="absolute top-full left-0 w-full p-3 px-4 backdrop-blur-xl border-b border-gray-500/10"
+        onBlur={() => setIsMobileSearchOpen(false)}
+      >
+        <HeaderSearchBox
+          className="max-w-full"
+          showCloseButton={true}
+          onClose={() => setIsMobileSearchOpen(false)}
+          inputRef={mobileSearchInputRef}
+        />
+      </div>
+    )}
   </header>
   )  
 }
