@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { useAuth } from '@/hooks/useAuth'
 import Loading from '@/app/loading'
+import AlertPopup from './AlertPopup'
 
 export default function SignIn() {
   const [email, setEmail] = useState('')
@@ -9,10 +10,12 @@ export default function SignIn() {
   const [isSignUp, setIsSignUp] = useState(false)
   const [processing, setProcessing] = useState(false)
   const { user, loading, signUp, signIn, signOut } = useAuth()
+  const [alertMessage, setAlertMessage] = useState("")
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setProcessing(true)
+    setAlertMessage("") // Clear previous message
     
     try {
       if (isSignUp) {
@@ -24,7 +27,8 @@ export default function SignIn() {
       setEmail('')
       setPassword('')
     } catch (error) {
-      alert(error.message)
+      setAlertMessage(error.message)
+      console.error(error.message)
     } finally {
       setProcessing(false)
     }
@@ -52,6 +56,7 @@ export default function SignIn() {
   }
 
   return (
+  <>
     <div className="w-96 mx-auto px-6 py-10 bg-gray-800/60 -translate-y-20 text-white rounded-lg shadow-lg my-auto">
       <h2 className="text-2xl mb-6 text-center">
         {isSignUp ? 'Sign Up' : 'Sign In'}
@@ -101,6 +106,9 @@ export default function SignIn() {
           {isSignUp ? 'Sign In' : 'Sign Up'}
         </button>
       </p>
+
     </div>
+    <AlertPopup message={alertMessage} className='text-red-400' />
+  </>
   )
 }
