@@ -36,7 +36,7 @@ export default function SearchPage() {
   }, [query])
 
   return (
-  <main className="px-24 my-14">
+  <main className="w-full mx-auto px-5 md:px-10 lg:px-24 py-14">
     <H2ForSection title="Search Results" />
     {isLoading ? 
       <Loading />
