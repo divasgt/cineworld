@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useAuth } from '@/hooks/useAuth'
 import Loading from '@/app/loading'
 import AlertPopup from './AlertPopup'
+import Link from 'next/link'
 
 export default function SignIn() {
   const [email, setEmail] = useState('')
@@ -49,14 +50,23 @@ export default function SignIn() {
     return (
       <div className="w-full max-w-72 md:max-w-xl mx-auto px-6 py-10 text-sm md:text-base bg-gray-800/60 -translate-y-20 text-white rounded-lg shadow-lg my-auto text-center">
         <h2 className="text-wrap break-words md:text-2xl mb-4">Welcome, {user.email}!</h2>
-        <p className="text-gray-300 mb-4">You're logged in successfully.</p>
+        <p className="text-gray-300 mb-4">You're signed in successfully.</p>
 
-        <button
-          onClick={signOut}
-          className="text-blue-400 hover:text-blue-300 cursor-pointer"
-        >
-          Sign Out
-        </button>
+        <div className='space-x-4'>
+          <Link
+            href="/"
+            className="text-blue-400 hover:text-blue-300 cursor-pointer"
+          >
+            Go to Home
+          </Link>
+
+          <button
+            onClick={signOut}
+            className="text-blue-400 hover:text-blue-300 cursor-pointer"
+          >
+            Sign Out
+          </button>
+        </div>
       </div>
     )
   }
