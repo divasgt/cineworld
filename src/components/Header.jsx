@@ -86,7 +86,7 @@ export default function Header() {
         {/* Search icon for <lg screens */}
         <button
           onClick={() => setIsMobileSearchOpen(true)}
-          className="lg:hidden hover:opacity-80 text-white p-1.5 cursor-pointer"
+          className="lg:hidden hover:opacity-80 active:opacity-80 text-white p-1.5 cursor-pointer"
         >
           <MdSearch className="size-5" />
         </button>
@@ -109,7 +109,7 @@ export default function Header() {
           <button 
             onClick={() => setIsMoreMenuOpen(!isMoreMenuOpen)}
             onBlur={() => setTimeout(() => setIsMoreMenuOpen(false), 200)}
-            className="text-white hover:opacity-80 p-1.5 cursor-pointer"
+            className="text-white hover:opacity-80 active:opacity-80 p-1.5 cursor-pointer"
           >
             <BsThreeDotsVertical className="size-5" />
           </button>
