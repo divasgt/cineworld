@@ -12,7 +12,7 @@ export default function TrailerBtn({trailer}) {
     if (trailer) {
       setShowTrailerModal(true)
     } else {
-      setAlertMessage("Trailer not available")
+      setAlertMessage(<div>Trailer not available</div>)
     }
   }
   
