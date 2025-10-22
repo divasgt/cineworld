@@ -40,22 +40,22 @@ export default function Header() {
     {/* Background with blur effect */}
     <div className={`absolute inset-0 transition-colors ${scrolled ? "bg-gray-900/70 backdrop-blur-xl" : "bg-transparent"}`}></div>
 
-    {/* Header content */}
+    {/* Header flex-row content */}
     <div className="relative text-gray-400 font-medium flex justify-between items-center px-4 sm:px-9 py-2.5">
       
       <div className="header-left shrink-0">
         <nav className="nav-links flex gap-5 items-center shrink-0 mr-8">
           <Link href="/" className="logo text-2xl tracking-tighter font-bold mr-2 bg-gradient-to-r from-red-500 to-orange-800 bg-clip-text text-transparent">CineWorld</Link>
           
-          {/* Links for lg screens */}
-          <div className="hidden lg:flex gap-5 items-center">
+          {/* Links for md screens */}
+          <div className="hidden md:flex gap-5 items-center">
             <Link href="/#intro-section" className="hover:text-white transition">Home</Link>
             <Link href="/#latestMovies" className="hover:text-white transition">Movies</Link>
             <Link href="/#latestTVShows" className="hover:text-white transition">TV Shows</Link>
           </div>
 
-          {/* Browse dropdown for sm screens */}
-          <div className="relative lg:hidden">
+          {/* Browse dropdown for md screens */}
+          <div className="relative md:hidden">
             <button
               onClick={() => setIsBrowseOpen(!isBrowseOpen)}
               onBlur={() => setTimeout(() => setIsBrowseOpen(false), 150)}
@@ -86,7 +86,7 @@ export default function Header() {
         {/* Search icon for <lg screens */}
         <button
           onClick={() => setIsMobileSearchOpen(true)}
-          className="lg:hidden text-white p-1.5 cursor-pointer"
+          className="lg:hidden hover:opacity-80 text-white p-1.5 cursor-pointer"
         >
           <MdSearch className="size-5" />
         </button>
@@ -109,7 +109,7 @@ export default function Header() {
           <button 
             onClick={() => setIsMoreMenuOpen(!isMoreMenuOpen)}
             onBlur={() => setTimeout(() => setIsMoreMenuOpen(false), 200)}
-            className="text-white p-1.5 cursor-pointer"
+            className="text-white hover:opacity-80 p-1.5 cursor-pointer"
           >
             <BsThreeDotsVertical className="size-5" />
           </button>
@@ -127,22 +127,23 @@ export default function Header() {
           </div>
         </div>
       </div>
-    
-      {/* Mobile Search Overlay */}
-      {isMobileSearchOpen && (
-        <div
-          className="absolute top-full left-0 w-full p-3 px-4 bg-gray-900/70 backdrop-blur-xl border-b border-gray-500/10"
-          onBlur={() => setIsMobileSearchOpen(false)}
-        >
-          <HeaderSearchBox
-            className="max-w-full"
-            showCloseButton={true}
-            onClose={() => setIsMobileSearchOpen(false)}
-            inputRef={mobileSearchInputRef}
-          />
-        </div>
-      )}
+
     </div>
+    
+    {/* Mobile Search Overlay in header below flex-row content */}
+    {isMobileSearchOpen && (
+      <div
+        className="w-full pb-3 pt-1 px-4 md:px-40"
+        onBlur={() => setIsMobileSearchOpen(false)}
+      >
+        <HeaderSearchBox
+          className="max-w-full lg:hidden"
+          showCloseButton={true}
+          onClose={() => setIsMobileSearchOpen(false)}
+          inputRef={mobileSearchInputRef}
+        />
+      </div>
+    )}
   </header>
   )  
 }

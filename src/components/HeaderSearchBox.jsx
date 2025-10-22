@@ -30,7 +30,7 @@ export default function HeaderSearchBox({ showCloseButton=false, onClose=null, c
     <input
       type="text"
       placeholder="Search anything..."
-      className="bg-gray-700/30 focus:bg-gray-800/70 py-1 px-4 pl-12 pr-10 w-full  text-sm  rounded-md border border-gray-500/10 focus:border-gray-400/20 focus:border-2 inset-1 outline-none"
+      className="bg-gray-700/30 hover:bg-gray-800/70 focus:bg-gray-800/70 py-1 px-4 pl-12 pr-10 w-full  text-sm  rounded-md border border-gray-500/10 focus:border-gray-400/20 focus:border-2 inset-1 outline-none"
       value={query || ""}
       onChange={(e) => setQuery(e.target.value)}
       onKeyDown={(e) => e.key==="Enter" ? router.push(`/search?q=${encodeURIComponent(query.trim())}`) : null}
