@@ -11,6 +11,7 @@ export default function SignIn() {
   const [processing, setProcessing] = useState(false)
   const { user, loading, signUp, signIn, signOut } = useAuth()
   const [alertMessage, setAlertMessage] = useState("")
+  // const [bottomInfoTextShown, setBottomInfoTextShown] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -26,6 +27,11 @@ export default function SignIn() {
       // Clear form on success
       setEmail('')
       setPassword('')
+
+      // On sign up successful:
+      if (isSignUp) {
+        setAlertMessage("User created! Please check your email for confirmation.")
+      }
     } catch (error) {
       setAlertMessage(error.message)
       console.error(error.message)
@@ -41,13 +47,13 @@ export default function SignIn() {
 
   if (user) {
     return (
-      <div className="w-96 mx-auto px-6 py-10 bg-gray-800/60 -translate-y-20 text-white rounded-lg shadow-lg my-auto">
-        <h2 className="text-2xl mb-4">Welcome, {user.email}!</h2>
+      <div className="w-full max-w-72 md:max-w-xl mx-auto px-6 py-10 text-sm md:text-base bg-gray-800/60 -translate-y-20 text-white rounded-lg shadow-lg my-auto text-center">
+        <h2 className="text-wrap break-words md:text-2xl mb-4">Welcome, {user.email}!</h2>
         <p className="text-gray-300 mb-4">You're logged in successfully.</p>
 
         <button
           onClick={signOut}
-          className="ml-1 text-blue-400 hover:text-blue-300 cursor-pointer"
+          className="text-blue-400 hover:text-blue-300 cursor-pointer"
         >
           Sign Out
         </button>
@@ -57,7 +63,7 @@ export default function SignIn() {
 
   return (
   <>
-    <div className="w-96 mx-auto px-6 py-10 bg-gray-800/60 -translate-y-20 text-white rounded-lg shadow-lg my-auto">
+    <div className="w-full max-w-72 md:max-w-96 mx-auto px-6 pt-10 pb-12 text-sm md:text-base md:text-md bg-gray-800/60 -translate-y-20 text-white rounded-lg shadow-lg my-auto">
       <h2 className="text-2xl mb-6 text-center">
         {isSignUp ? 'Sign Up' : 'Sign In'}
       </h2>
@@ -108,7 +114,12 @@ export default function SignIn() {
       </p>
 
     </div>
-    <AlertPopup message={alertMessage} className='text-red-400' />
+
+    <AlertPopup 
+      message={alertMessage} 
+      duration={alertMessage?.includes('confirmation') ? 60000 : 5000}
+      className={alertMessage?.includes('confirmation') ? 'bg-gray-800' : 'text-red-400'}
+    />
   </>
   )
 }
