@@ -2,7 +2,7 @@
 import Link from "next/link";
 import HeaderButton from "./HeaderButton";
 import HeaderSearchBox from "./HeaderSearchBox";
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { MdArrowDropDown } from "react-icons/md";
 import { MdSearch } from 'react-icons/md';
 import { BsThreeDotsVertical } from 'react-icons/bs';
@@ -78,7 +78,9 @@ export default function Header() {
       <div className="header-right flex items-center gap-3 sm:gap-5 flex-grow justify-end *:text-nowrap">
         {/* Search bar for lg screens */}
         <div className="hidden lg:flex flex-grow justify-end">
-          <HeaderSearchBox />
+          <Suspense>
+            <HeaderSearchBox />
+          </Suspense>
         </div>
 
         {/* Search icon for <lg screens */}
