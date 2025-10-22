@@ -18,11 +18,11 @@ export default function WatchlistBtn({tmdbId, title, type, year, posterPath}) {
   const handleClick = async () => {
     if (!user) {
       setAlertMessage(
-        <>
+        <div>
           Please
-          <Link href="/signin" className="text-blue-400 hover:text-blue-300 cursor-pointer mx-1.5">Sign In</Link>
+          <Link href="/signin" className="text-blue-400 hover:text-blue-300 cursor-pointer mx-1">Sign In</Link>
           to use this feature
-        </>
+        </div>
       )
       return
     }
@@ -31,10 +31,10 @@ export default function WatchlistBtn({tmdbId, title, type, year, posterPath}) {
       if (isInWatchlist) {
         await removeFromWatchlist(tmdbId)
         setAlertMessage(
-          <>
-            Removed from 
-            <Link href="/watchlist" className="text-blue-400 hover:text-blue-300 cursor-pointer mx-1.5">Watchlist</Link>
-          </>
+          <div>
+            Removed from
+            <Link href="/watchlist" className="text-blue-400 hover:text-blue-300 cursor-pointer mx-1">Watchlist</Link>
+          </div>
         )
       } else {
         await addToWatchlist(tmdbId, title, type, year, posterPath)
