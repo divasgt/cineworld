@@ -1,107 +1,160 @@
-# 🎬 CineWorld
+# CineWorld 🎬
 
-CineWorld is your one-stop website made for cinema enthusiasts exploring the vast universe of movies and TV shows. Discover latest blockbusters to timeless classics, manage your watchlists, and even chat with an AI cinebot for finding perfect recommendations!
+CineWorld is your one-stop website designed for cinema enthusiasts. Discover latest blockbusters to timeless classics, search for specific titles, manage your watchlists, and even chat with an AI cinebot for getting information and finding perfect recommendations!
+The application leverages various APIs, including TMDB for content data and Google Gemini for AI-powered features, and uses Supabase for user authentication and data storage. CineWorld is built with Next.js, React.js, and Tailwind CSS, and deployed on Vercel.
 
 ### 🔗 Live Link: https://cineworld-app.vercel.app/
 
 
-## 🚀 Tech Stack
+## 🚀 Key Features
 
-*   **Frontend**: [Next.js](https://nextjs.org/), [React.js](https://react.dev/), [Tailwind CSS](https://tailwindcss.com/)
-*   **API Integration**: [TMDB API](https://www.themoviedb.org/documentation/api) (for content data), [Google Gemini API](https://ai.google.dev/) (for AI features)
-*   **Authentication & Database**: [Supabase](https://supabase.com/) (for user authentication, and user lists storage)
-*   **Deployment**: [Vercel](https://vercel.com/)
-*   **Style**: [Tailwind CSS](https://tailwindcss.com)
+- **Movie and TV Show Exploration:** Browse a vast library of movies and TV shows. 🍿
+- **Anime Exploration:** Browse a vast library of Anime shows. 🌸
+- **Search Implementation:** Quickly find specific titles using the search functionality. 🔍
+- **Media Details Pages:** View detailed information about movies and TV shows, including cast, crew, synopsis, and ratings. ℹ️
+- **User Authentication:** Securely sign up, sign in, and manage your account. 🔑
+- **Personal Watchlist:** Save movies and TV shows to your personal watchlist for later viewing. 📝
+- **AI Cinebot:** Interact with an AI-powered chatbot for recommendations, trivia, and more. 🤖
 
-## ✨ Core Features
+## 🛠️ Tech Stack
 
-### 🎥📺 Movie & TV Show Exploration
-*   **Dynamic Layouts**: Content displayed in dynamic grid and horizontal layouts.
-*   **Comprehensive Data**: Utilizes the TMDB API to fetch extensive media information.
-*   **Homepage Sections**: Dedicated sections for trending, popular, and top-rated movies and TV shows.
-*   **Loading Skeletons**: Enhanced user experience with global loading skeletons.
-*   **Global Error Handling**: Graceful error handling with dedicated error pages.
-*   **Toast Notifications**: Informative toast popups for user actions.
-*   **Fully Responsive**: Optimized for seamless viewing across all devices, including a separate header for mobile screens.
+- **Frontend:**
+    - [Next.js](https://nextjs.org/) (15.5.4): React framework for building server-rendered applications.
+    - [React.js](https://react.dev/) (19.1.0): JavaScript library for building user interfaces.
+    - [Tailwind CSS](https://tailwindcss.com/) (4): CSS framework for styling the application.
+    - tailwind-merge (3.3.1): Utility for merging Tailwind CSS class names.
+    - React Icons (5.5.0): Library of pre-built React icons.
+    - React Markdown (10.1.0): React component for rendering Markdown.
+- **Backend & Database:**
+    - [Supabase](https://supabase.com): Backend-as-a-service for authentication and database management.
+- **API Integrations:**
+    - [TMDB API](https://www.themoviedb.org/documentation/api): For fetching movie and TV show data.
+    - [Google Gemini API](https://ai.google.dev/): For AI-powered features.
+- **Deployment:**
+    - [Vercel](https://vercel.com/): Platform for deploying the application.
 
-### 🔍 Search Implementation
-*   **Responsive Search Bar**: Features a debounced search bar to optimize API calls.
-*   **Live Search Results**: Displays real-time search results as the user types.
-*   **Robust Handling**: Includes loading states and error handling for search queries.
+## 📦 Getting Started
 
-### 📄 Media's Details Pages
-*   **Dynamic Routing**: Dedicated pages for individual movie and TV show details.
-*   **Rich Information**: Displays release year, length/number of seasons, star rating, age rating, genres, overview, creators, directors, writers, and similar content recommendations.
-*   **Trailer Playback**: Integrated [YouTube API](https://developers.google.com/youtube/v3) for playing trailers in a modal.
-*   **Streaming Options**: Shows available streaming platforms with direct links.
-*   **Cast Section**: Horizontal cast section, initially loading 15 cast members with an option to "show all".
+### Prerequisites
 
-### 🔒👤 User Authentication & Personalization
-*   **Secure Authentication**: Implemented using [Supabase](https://supabase.com/) for secure sign-in and sign-up.
-*   **Form Validation**: Sign-in and sign-up forms with comprehensive error checks.
-*   **Dynamic Header**: Sign-in button dynamically changes to a profile photo icon and sign-out button upon successful authentication.
-*   **Persistent Sessions**: Maintains user sessions across visits.
-*   **Email Verification**: Sends confirmation emails for user verification, with dynamic instant sign-in upon redirection to the app.
-*   **Protected Routes**: Ensures only authenticated users can access certain parts of the application.
+- Node.js (>=18)
+- npm or yarn or pnpm
+- Supabase account and project
+- Google Cloud project with Gemini API enabled
+- TMDB API key
 
-### 🔖📝 Watchlist Feature
-*   **Personalized Lists**: Users can add content to a watchlist, mark as watched, and view their history.
-*   **Supabase Integration**: All user lists are managed and stored using [Supabase](https://supabase.com/).
-*   **Toggle Functionality**: Easy add/remove functionality for watchlist and watched items.
-*   **Dynamic UI**: Button icons and text change upon interaction, accompanied by toast popups (e.g., "Added to watchlist" with a link to the watchlist page).
-*   **Persistent Storage**: Watchlist data is stored persistently across user sessions.
-*   **Categorized Lists**: Separate sections for movies and TV shows within watchlist, watched, and history pages.
+### Installation
 
-### 🤖💡 Cinema AI Integration
-*   **Google Gemini API**: Integrated for an interactive Cinema AI chat page.
-*   **Intelligent Recommendations**: Users can chat with the AI to ask cinema-related questions or get personalized recommendations.
-*   **Robust System Instructions**: Utilizes detailed system instructions for accurate and relevant AI responses.
-*   **Recommendation Cards**: AI recommendations are presented in a card format, linking directly to their respective details pages (fetched via TMDB API).
-*   **Error Handling**: Provides links to search by content name if TMDB data cannot be found for an AI recommendation.
-*   **Context Preservation**: Maintains chat context for a more natural conversation flow.
-*   **Guest Limitations**: Unauthenticated users are limited to 3 AI queries.
-*   **Rate Limiting**: Implemented to manage API usage efficiently.
+1.  Clone the repository:
 
-### 🎨✨ UI/UX Features
-*   **Responsive Design**: Built with [CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout) and [Flexbox](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout) for optimal viewing on any screen size.
-*   **Custom Loading Skeletons**: Enhances user experience during data fetching.
-*   **Smooth Animations**: Seamless state transitions for a polished feel.
-*   **Error Boundaries**: Graceful error handling to prevent app crashes.
-*   **Toast Notifications**: Provides timely feedback for user actions.
+    ```bash
+    git clone <repository-url>
+    cd cineverse
+    ```
 
-### 🚀⚡ Performance Optimizations
-*   **Image Optimization**: Utilizes image optimization and lazy loading techniques.
-*   **Code Splitting**: Improves initial load times by splitting code into smaller chunks.
-*   **React `useMemo`**: Leverages `useMemo` for memoizing expensive computations.
-*   **Error Boundaries**: Implemented for robust error handling and improved stability.
+2.  Install dependencies:
 
-### 🔌🌐 API Integration
-*   **Custom Hooks**: Developed custom hooks for streamlined API calls.
-*   **Comprehensive Error Handling**: Robust error handling for all API interactions.
-*   **Retry Logic**: Implemented retry mechanisms for failed requests.
-*   **Rate Limiting**: Manages API usage to prevent hitting rate limits.
-*   **Data Caching**: Strategies for efficient data caching.
-*   **Efficient State Management**: Optimized state management for API data.
+    ```bash
+    npm install # or yarn install or pnpm install
+    ```
 
-### ✨➕ Additional Features
-*   **Custom Hooks**: Reusable custom hooks for common functionalities.
-*   **Loading States**: Clear loading indicators for all asynchronous operations.
-*   **Cross-Browser Compatibility**: Tested for consistent performance across various browsers.
+3.  Set up environment variables:
 
-## 🚀 Getting Started
+    - Create a `.env.local` file in the root directory.
+    - Add the following environment variables, replacing the placeholders with your actual values:
 
-First, run the development server:
+    ```
+    NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+    NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+    NEXT_PUBLIC_TMDB_API_KEY=your_tmdb_api_key
+    GOOGLE_API_KEY=your_google_gemini_api_key
+    ```
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+    -   **NEXT_PUBLIC_SUPABASE_URL**: Your Supabase project URL.
+    -   **NEXT_PUBLIC_SUPABASE_ANON_KEY**: Your Supabase anon key.
+    -   **NEXT_PUBLIC_TMDB_API_KEY**: Your TMDB API key.
+    -   **GOOGLE_API_KEY**: Your Google Gemini API key.
+
+### Running Locally
+
+1.  Start the development server:
+
+    ```bash
+    npm run dev # or yarn dev or pnpm dev
+    ```
+
+2.  Open your browser and navigate to `http://localhost:3000`.
+
+## 💻 Usage
+
+- Explore movies, TV shows, and anime on the homepage.
+- Use the search bar to find specific titles.
+- Click on a media item to view its details page.
+- Sign up or sign in to add items to your watchlist.
+- Interact with the AI cinebot for recommendations and information.
+
+## 📂 Project Structure
+
+```
+cineverse/
+├── .eslintrc.cjs           # ESLint configuration
+├── jsconfig.json           # JavaScript configuration
+├── next.config.mjs         # Next.js configuration
+├── package-lock.json       # Dependency lock file
+├── package.json            # Project dependencies and scripts
+├── postcss.config.mjs      # PostCSS configuration
+├── README.md               # Project documentation
+├── src/
+│   ├── app/                # Next.js app directory
+│   │   ├── error.jsx       # Custom error page
+│   │   ├── globals.css     # Global CSS styles
+│   │   ├── layout.jsx      # Root layout
+│   │   ├── loading.jsx     # Loading indicator
+│   │   ├── movie/
+│   │   │   └── [id]/
+│   │   │       └── page.jsx # Movie details page
+│   │   ├── search/
+│   │   │   └── page.jsx     # Search page
+│   │   ├── signin/
+│   │   │   └── page.jsx     # Sign-in page
+|   |   ├──tv/
+│   │   │   └── [id]/
+│   │   │       └── page.jsx # TV details page
+│   │   ├── watchlist/
+│   │   │   └── page.jsx     # Watchlist page
+│   ├── components/...      # Reusable React components
+│   ├── hooks/              # Custom React hooks
+│   │   ├── useAuth.jsx     # Authentication hook
+│   │   └── useWatchlist.jsx # Watchlist hook
+│   ├── lib/
+│   │   ├── supabase.js     # For supabase
+│   │   └── tmdb.js         # For tmdb
+│   ├── utils/
+│   │   ├── constants.js     # Some constants
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📸 Screenshots
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+(Add screenshots of the application here)
+
+## 🤝 Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1.  Fork the repository.
+2.  Create a new branch for your feature or bug fix.
+3.  Make your changes and commit them with descriptive messages.
+4.  Push your changes to your fork.
+5.  Submit a pull request.
+
+## 📝 License
+
+This project is licensed under the [MIT License](LICENSE).
+
+## 📬 Contact
+
+If you have any questions or suggestions, feel free to contact me using my contact options mentioned at https://github.com/divasgt
+
+## 💖 Thanks
+
+Thank you for checking out CineVerse! I hope you enjoy exploring the world of cinema with this application.
