@@ -17,7 +17,7 @@ export default function CastSection({data}) {
             className='w-full h-[168px] md:h-[240px] object-cover'
             src={
               item.profile_path
-                ? `${IMAGE_BASE_URL}original${item.profile_path}`
+                ? `${IMAGE_BASE_URL}w185${item.profile_path}`
                 : PLACEHOLDER_IMAGE_URL(160, 240)}
             alt={item.name}
             height={240}
