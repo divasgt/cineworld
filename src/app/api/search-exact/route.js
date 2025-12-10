@@ -2,10 +2,10 @@ import { BASE_URL, TMDB_API_KEY } from "@/lib/tmdb";
 import { NextResponse } from "next/server";
 
 export async function GET(request) {
-  const { searchParams } = new URL(request.url)
-  const title = searchParams.get('title')
-  const year = searchParams.get('year')
-  const type = searchParams.get('type') // 'movie' or 'tv'
+  const url1 = new URL(request.url)
+  const title = url1.searchParams.get('title')
+  const year = url1.searchParams.get('year')
+  const type = url1.searchParams.get('type') // 'movie' or 'tv'
 
   if (!title || !type) {
     return NextResponse.json(
@@ -17,9 +17,7 @@ export async function GET(request) {
   const endpoint = type === 'movie' ? 'search/movie' : 'search/tv'
   const yearParam = type === 'movie' ? 'year' : 'first_air_date_year'
 
-  // let url = `${BASE_URL}/${endpoint}?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(title)}&language=en-US&page=1`
-  // if (year) url += `&${yearParam}=${year}`
-  // This is more robust way of attaching search parameters to url, instead of string concatenation above
+  // This is more robust way of attaching search parameters to url, instead of string concatenation
   const url = new URL(`${BASE_URL}/${endpoint}`)
   url.searchParams.append('api_key', TMDB_API_KEY)
   url.searchParams.append('query', title)

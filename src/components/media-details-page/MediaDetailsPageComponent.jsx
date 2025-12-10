@@ -36,7 +36,7 @@ function getAgeRating(detailsData, type) {
 export default async function MediaDetailsPageComponent({type, id}) {
   let detailsData
   try {
-    detailsData = await fetchFromTmdb(`/${type}/${id}`, "detailsPage")
+    detailsData = await fetchFromTmdb(`/${type}/${id}`, {append_to_response : "videos,release_dates,content_ratings,credits,keywords,similar,recommendations,external_ids,watch/providers"})
   } catch (err) {
     if (err.message.includes('404')) notFound()
     throw err // For other errors, the nearest error.jsx page will be shown

@@ -11,10 +11,10 @@ export default async function Home() {
 	
 	try {
 		const [latestMoviesResponse, latestTvResponse, topMoviesResponse, topTvResponse] = await Promise.all([
-			fetchFromTmdb("/movie/now_playing", "homePage"),
-			fetchFromTmdb("/tv/on_the_air", "homePage"),
-			fetchFromTmdb("/movie/top_rated", "homePage"),
-			fetchFromTmdb("/tv/top_rated", "homePage"),
+			fetchFromTmdb("/movie/now_playing", {language : "en-US", page : 1}),
+			fetchFromTmdb("/tv/on_the_air", {language : "en-US", page : 1}),
+			fetchFromTmdb("/movie/top_rated", {language : "en-US", page : 1}),
+			fetchFromTmdb("/tv/top_rated", {language : "en-US", page : 1}),
 		]);
 
 		// Check responses

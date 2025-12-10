@@ -3,8 +3,8 @@ import { NextResponse } from "next/server";
 
 export async function GET(request) {
   // this is how we read query parameters
-  const {searchParams} = new URL(request.url)
-  const query = searchParams.get('q')
+  const url = new URL(request.url)
+  const query = url.searchParams.get('q')
 
   if (!query) {
     return NextResponse.json(
