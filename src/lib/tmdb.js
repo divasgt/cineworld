@@ -16,7 +16,6 @@ export async function fetchFromTmdb(endpoint, params = {}) {
   if (!response.ok) {
     throw new Error(`API Error: ${response.status} ${response.statusText}`);
   }
-
   const data = await response.json();
   // if (data.results) return data.results;
 	return data;
