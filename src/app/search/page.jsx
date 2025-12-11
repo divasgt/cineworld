@@ -17,7 +17,7 @@ export default function SearchPage() {
       if (query) {
         setIsLoading(true)
         try {
-          const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`)
+          const res = await fetch(`/api/search/multi?query=${encodeURIComponent(query)}&language=en-US&page=1`)
           const data = await res.json()
           setSearchResults(data.results)
           console.log("Fetched search results data: ", data)
