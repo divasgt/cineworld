@@ -133,6 +133,15 @@ export default function MediaCard({
         : "left-0 origin-center"
     }
   }
+
+  // Close hover card on scroll
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     if (isHovering) setIsHovering(false)
+  //   }
+  //   window.addEventListener('scroll', handleScroll, true)
+  //   return () => window.removeEventListener('scroll', handleScroll, true)
+  // }, [isHovering])
   
   return (
   // Outer container - maintains 2/3 size in grid
@@ -145,7 +154,8 @@ export default function MediaCard({
     {/* Absolute container - which expands */}
     <div
       className={`
-        absolute top-0 block h-full rounded-lg bg-gray-800 transition-all duration-300 ease-in-out shadow-md hover:scale-115 hover:shadow-md hover:shadow-black/40 group
+        absolute top-0 block h-full rounded-lg bg-gray-800 transition-all duration-300 ease-in-out shadow-md group
+        ${isHovering ? "scale-115 shadow-black/40" : ""}
         ${getPositionClasses()}
         ${isTrailerShown
           ? `w-[266.66%]`
@@ -178,7 +188,7 @@ export default function MediaCard({
 
       {isHovering && 
         <div
-          className={`px-3 py-2.5 top-full absolute left-0 right-0 transition-opacity duration-200 bg-neutral-950 rounded-b-lg shadow shadow-black/80`}
+          className={`px-3 py-2.5 top-full absolute left-0 right-0 transition-opacity duration-200 bg-gray-900 rounded-b-lg shadow shadow-black/80`}
         >
           <h3 className={`font-bold overflow-hidden line-clamp-2 ${isTrailerShown && "text-lg"}`} title={title}>{title}</h3>
 
