@@ -19,70 +19,87 @@ export default function MediaCard({
 }) {
   const [isHovering, setIsHovering] = useState(false)
   const [isTrailerShown, setIsTrailerShown] = useState(false)
-  const [alignment, setAlignment] = useState("center")
   const [trailerKey, setTrailerKey] = useState(null)
-  
-  const timerRef = useRef(null)
-  const containerRef = useRef(null)
-  const isHoveringRef = useRef(false) // ref to track hovering state inside async function (refs are instant, state setter function is not instant)
+  const [hasFetched, setHasFetched] = useState(false) // Cache to prevent repeated fetch requests
+  const [alignment, setAlignment] = useState("center")
 
-  const title = mediaTitle || (isMovie ? item.title : item.name);
-  let year;
+  const title = mediaTitle || (isMovie ? item.title : item.name)
+  const linkPath = `/${isMovie ? "movie" : "tv"}/${tmdbId || item.id}`
+  const rating = item?.vote_average ? item.vote_average.toFixed(1) : null
+
+  let year
   if (!releaseYear) {
-    const releaseDate = isMovie ? item.release_date : item.first_air_date;
-    year = releaseDate ? new Date(releaseDate).getFullYear() : 'N/A';
+    const releaseDate = isMovie ? item.release_date : item.first_air_date
+    year = releaseDate ? new Date(releaseDate).getFullYear() : 'N/A'
   } else {
     year = releaseYear
   }
 
-  let rating;
-  if (item) {
-    rating = item.vote_average ? item.vote_average.toFixed(1) : 'N/A';
-  } else {
-    rating = null;
-  }
-
   // Use placeholder size based on approximate card size
-  const placeholderWidth = layoutType === 'horizontal' ? 130 : 140;
-  const placeholderHeight = placeholderWidth * 1.5; // Maintain 2:3 ratio
-  const posterPathUsed = posterPath || (item && item.poster_path)
+  const placeholderWidth = layoutType === 'horizontal' ? 130 : 140
+  const placeholderHeight = placeholderWidth * 1.5; // For 2:3 ratio
+  const posterSrc = posterPath || item?.poster_path
     ? `${IMAGE_BASE_URL}w342${posterPath || item.poster_path}`
     : PLACEHOLDER_IMAGE_URL(placeholderWidth, placeholderHeight);
   
-  const linkPath = `/${isMovie ? 'movie' : 'tv'}/${tmdbId || item.id}`;
-
-  // clear timeout on component unmount
   useEffect(() => {
-    return () => clearTimeout(timerRef.current)
-  }, [])
+    let timer
+    // To prevent state updates if unmounted/stopped hovering, make this false in cleanup function
+    let isActive = true
 
-  async function fetchTrailer() {
-    const type = isMovie ? "movie" : "tv"
-    const id = tmdbId || item.id
+    if (isHovering) {
+      timer = setTimeout(async () => {
+        // If we already have key and it is not unavailable then just show it
+        if (trailerKey && trailerKey !== "unavailable") {
+          if (isActive) setIsTrailerShown(true)
+          return
+        }
 
-    try {
-      const response = await fetch(`/api/${type}/${id}?append_to_response=videos`)
-      if (!response.ok) return null
-      const data = await response.json()
-      const trailer = data.videos.results.find(v => v.type==='Trailer' && v.site==='YouTube')
+        // If we haven't fetched yet, fetch it
+        if (!hasFetched) {
+          const type = isMovie ? "movie" : "tv"
+          const id = tmdbId || item.id
 
-      if (trailer) {
-        setTrailerKey(trailer.key)
-        return trailer.key
-      }
-    } catch(err) {
-      console.error("Failed to fetch trailer on hover:", err)
+          try {
+            const response = await fetch(`/api/${type}/${id}?append_to_response=videos`)
+            if (!response.ok) throw new Error("Fetch failed!")
+            const data = await response.json()
+            const trailer = data.videos.results.find(v => v.type==='Trailer' && v.site==='YouTube')
+
+            // Check isActive before setting state
+            if (isActive) {
+              setHasFetched(true)
+              if (trailer) {
+                setTrailerKey(trailer.key)
+                setIsTrailerShown(true)
+              } else {
+                setTrailerKey("unavailable")
+              }
+            }
+          } catch (err) {
+            console.error(err)
+            // Don't retry if failed
+            if (isActive) setHasFetched(true)
+          }
+        }
+      }, 1000)
+    } else {
+      setIsTrailerShown(false)
     }
-    setTrailerKey("unavailable")
-    return null
-  }
-  
-  function handleMouseEnter() {
+
+    // Cleanup: clear timeout and make isActive false
+    return () => {
+      clearTimeout(timer)
+      isActive = false
+    }
+  }, [isHovering, trailerKey, hasFetched, isMovie, tmdbId, item])
+
+  function handleMouseEnter(e) {
     setIsHovering(true)
-    isHoveringRef.current = true
 
     // calculate anignment on mouse enter
-    const rect = containerRef.current.getBoundingClientRect()
+    const target = e.currentTarget
+    const rect = target.getBoundingClientRect()
     const viewportWidth = window.innerWidth
 
     // how much card will overflow out when its on left or right when expanded
@@ -91,7 +108,7 @@ export default function MediaCard({
     // overhang = (expanded width - w)/2 = (2.66w - w)/2 = 0.83 * w 
     const overhang = 0.83 * rect.width
 
-    // try doing overhang + abt 20 or 50 (px)
+    // try doing overhang + abt 20px or 50px
     if (rect.left < overhang + 30) {
       setAlignment("left") // when too close to left edge
     } else if (viewportWidth - rect.right < overhang ) {
@@ -99,56 +116,33 @@ export default function MediaCard({
     } else {
       setAlignment("center")
     }
-
-    if (timerRef.current) clearTimeout(timerRef.current)
-    timerRef.current = setTimeout(async () => {
-      if (!isHoveringRef.current) return
-  
-      let currentKey
-      if (!trailerKey || trailerKey !== "unavailable") {
-        currentKey = await fetchTrailer()
-      }
-      
-      if (isHoveringRef.current && currentKey) {
-        setIsTrailerShown(true)
-      }
-    }, 1000)
-  }
-
-  function handleMouseLeave() {
-    setIsHovering(false)
-    isHoveringRef.current = false
-
-    if (timerRef.current) clearTimeout(timerRef.current)
-    setIsTrailerShown(false)
   }
 
   // Get tailwind css classes for positioning based on calculated state
-  const getPositionClasses = () => {
+  function getPositionClasses() {
     if (alignment === "left") {
-      return "left-0 origin-left";
+      return "left-0 origin-left"
     } else if (alignment === "right") {
-      return "right-0 origin-right";
+      return "right-0 origin-right"
     } else {
       // For center, we only want the transform when expanded, 
       // but we need left-1/2 to anchor it to the middle.
       // To keep it simple in idle state, left-0 is fine, but for expansion:
       return isTrailerShown 
         ? "left-1/2 -translate-x-1/2 origin-center" 
-        : "left-0 origin-center"; 
+        : "left-0 origin-center"
     }
   }
   
   return (
   // Outer container - maintains 2/3 size in grid
-  <Link href={linkPath}>
-  <div
-    ref={containerRef}
+  <Link
+    href={linkPath}
     className={`relative aspect-2/3 hover:z-50`}
     onMouseEnter={handleMouseEnter}
-    onMouseLeave={handleMouseLeave}
+    onMouseLeave={() => setIsHovering(false)}
   >
-    {/* Animated container - which expands */}
+    {/* Absolute container - which expands */}
     <div
       className={`
         absolute top-0 block h-full rounded-lg bg-gray-800 transition-all duration-300 ease-in-out shadow-md hover:scale-115 hover:shadow-md hover:shadow-black/40 group
@@ -172,17 +166,14 @@ export default function MediaCard({
             ></iframe>
           </div>
         }
-
-        {/* <Link href={linkPath} className="block w-full h-full"> */}
         <Image
-          src={posterPathUsed}
+          src={posterSrc}
           alt={title || ""}
           className="block w-full h-auto aspect-2/3 object-cover bg-gray-700"
           height={342}
-          width={342}
+          width={513}
           unoptimized={!(posterPath || (item && item.poster_path))}
         />
-        {/* </Link> */}
       </div>
 
       {isHovering && 
@@ -205,7 +196,6 @@ export default function MediaCard({
         </div>
       }
     </div>
-  </div>
   </Link>
   )
 }
