@@ -3,7 +3,7 @@ import { IMAGE_BASE_URL, PLACEHOLDER_IMAGE_URL } from "@/utils/constants";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { MdStar } from "react-icons/md";
+import { MdStar, MdVolumeOff, MdVolumeUp } from "react-icons/md";
 
 // Modified to Handle when item object is passed, or (for watchlist items) when instead tmdbId, title, releaseYear, posterPath are passed.
 export default function MediaCard({
@@ -22,6 +22,9 @@ export default function MediaCard({
   const [trailerKey, setTrailerKey] = useState(null)
   const [hasFetched, setHasFetched] = useState(false) // Cache to prevent repeated fetch requests
   const [alignment, setAlignment] = useState("center")
+
+  const [isMuted, setIsMuted] = useState(true)
+  const iframeRef = useRef(null)
 
   const title = mediaTitle || (isMovie ? item.title : item.name)
   const linkPath = `/${isMovie ? "movie" : "tv"}/${tmdbId || item.id}`
@@ -134,6 +137,20 @@ export default function MediaCard({
     }
   }
 
+  function toggleMute(e) {
+    e.preventDefault()
+    e.stopPropagation() // To prevent link navigation
+
+    if (iframeRef.current) {
+      // Send command to YouTube Iframe
+      iframeRef.current.contentWindow.postMessage(
+        JSON.stringify({ event: "command", func: (isMuted ? "unMute" : "mute"), args: [] }), 
+        "*"
+      )
+      setIsMuted(!isMuted)
+    }
+  }
+
   // Close hover card on scroll
   // useEffect(() => {
   //   const handleScroll = () => {
@@ -168,12 +185,26 @@ export default function MediaCard({
         {isHovering &&
           <div className={`w-full h-full bg-black relative ${isTrailerShown ? "block" : "hidden"}`}>
             <iframe
+              ref={iframeRef}
               className='absolute -translate-y-[25%] w-full h-[200%] pointer-events-none'
-              src={`https://www.youtube.com/embed/${trailerKey}?autoplay=1&mute=1&controls=0&modestbranding=1&loop=1`}
+              src={`https://www.youtube.com/embed/${trailerKey}?autoplay=1&mute=1&controls=0&modestbranding=1&loop=1&enablejsapi=1`}
               title="Trailer"
               loading="lazy"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             ></iframe>
+
+            {/* Mute Button */}
+            {isTrailerShown && (
+              <button
+                onClick={toggleMute}
+                className="absolute top-3 right-3.5 z-30 p-2 bg-black/20 hover:bg-black/50 rounded-full text-white transition-colors duration-200 cursor-pointer group/muteBtn *:opacity-80 *:group-hover/muteBtn:opacity-100 *:transition-all *:duration-200"
+              >
+                {isMuted
+                  ? <MdVolumeOff size={20} />
+                  : <MdVolumeUp size={20} />
+                }
+              </button>
+            )}
           </div>
         }
         <Image
