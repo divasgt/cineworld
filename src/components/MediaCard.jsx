@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { MdStar, MdVolumeOff, MdVolumeUp } from "react-icons/md";
+import { twMerge } from "tailwind-merge";
 
 // Modified to Handle when item object is passed, or (for watchlist items) when instead tmdbId, title, releaseYear, posterPath are passed.
 export default function MediaCard({
@@ -112,7 +113,7 @@ export default function MediaCard({
     const overhang = 0.83 * rect.width
 
     // try doing overhang + abt 20px or 50px
-    if (rect.left < overhang + 30) {
+    if (rect.left < overhang + 20) {
       setAlignment("left") // when too close to left edge
     } else if (viewportWidth - rect.right < overhang ) {
       setAlignment("right") // when too close to right edge
@@ -164,21 +165,21 @@ export default function MediaCard({
   // Outer container - maintains 2/3 size in grid
   <Link
     href={linkPath}
-    className={`relative aspect-2/3 hover:z-50`}
+    className={`relative aspect-2/3 hover:z-50 ${isHovering && "z-50"}`}
     onMouseEnter={handleMouseEnter}
     onMouseLeave={() => setIsHovering(false)}
   >
     {/* Absolute container - which expands */}
     <div
-      className={`
-        absolute top-0 block h-full rounded-lg bg-gray-800 transition-all duration-300 ease-in-out shadow-md group
-        ${isHovering ? "scale-115 shadow-black/40" : ""}
-        ${getPositionClasses()}
-        ${isTrailerShown
-          ? `w-[266.66%]`
+      className={twMerge(
+        "absolute top-0 block h-full rounded-lg bg-gray-800 transition-all duration-300 ease-in-out shadow-md group", isHovering && "z-50 scale-105 md:scale-115 shadow-black/40",
+        getPositionClasses(),
+        isTrailerShown
+          // w 266.66% because it changes from 16/9 to 2/3 which is 2.66
+          ? `w-[266.66%] scale-80 sm:scale-100 -translate-y-6 sm:translate-y-0 md:h-full`
           : `w-full`
-        }
-      `}
+        )
+      }
     >
       {/* Content container for image and trailer iframe */}
       <div className={`relative w-full h-full overflow-hidden ${isHovering ? "rounded-t-lg" : "rounded-lg"}`}>
@@ -219,7 +220,7 @@ export default function MediaCard({
 
       {isHovering && 
         <div
-          className={`px-3 py-2.5 top-full absolute left-0 right-0 transition-opacity duration-200 bg-gray-900 rounded-b-lg shadow shadow-black/80`}
+          className={`px-3 py-2.5 top-full -mt-0.5 absolute left-0 right-0 transition-opacity duration-200 bg-gray-900 rounded-b-lg -z-1 shadow shadow-black/80`}
         >
           <h3 className={`font-bold overflow-hidden line-clamp-2 ${isTrailerShown && "text-lg"}`} title={title}>{title}</h3>
 
