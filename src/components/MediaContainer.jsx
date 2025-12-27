@@ -9,7 +9,7 @@ export function MediaContainer({id="", type="grid-container", children}) {
     }
 
     {type==="horizontal-container" && 
-      <div id={id} className="horizontal-container flex overflow-x-auto overflow-y-visible gap-2 sm:gap-4 md:gap-5 px-8 -mx-8 pb-52 pt-14 -mb-52 -mt-14 *:shrink-0 *:w-36 md:*:w-52">
+      <div id={id} className="horizontal-container flex overflow-x-auto overflow-y-visible gap-2 sm:gap-4 md:gap-5 px-8 -mx-5 md:-mx-10 pb-52 pt-14 -mb-52 -mt-14 *:shrink-0 *:w-36 md:*:w-52">
         {children}
       </div>
     }
