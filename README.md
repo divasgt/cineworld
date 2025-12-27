@@ -1,6 +1,6 @@
-# CineWorld 🎬
+# Cinema World 🎬
 
-CineWorld is your one-stop website designed for cinema enthusiasts. Discover latest blockbusters to timeless classics, search for specific titles, manage your watchlists, and even chat with an AI cinebot for getting information and finding perfect recommendations!
+Cinema World is your one-stop website designed for cinema enthusiasts. Discover latest blockbusters to timeless classics, search for specific titles, manage your watchlists, and even chat with an AI cinebot for getting information and finding perfect recommendations!
 The application leverages various APIs, including TMDB for content data and Google Gemini for AI-powered features, and uses Supabase for user authentication and data storage. CineWorld is built with Next.js, React.js, and Tailwind CSS, and deployed on Vercel.
 
 ### 🔗 Live Link: https://cineworld-app.vercel.app/

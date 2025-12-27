@@ -2,9 +2,9 @@ import { GoogleGenAI } from "@google/genai";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
-  const {query, history} = await request.json()
+  const { query, history } = await request.json()
 
-  const systemInstruction = `You are CineBot, a cheerful and knowledgeable AI assistant for the CineWorld website. Your sole purpose is to discuss cinema, movies, TV shows, anime, documentaries, actors, genres, and movie trivia.
+  const systemInstruction = `You are CineBot, a cheerful and knowledgeable AI assistant for the Cinema World website. Your sole purpose is to discuss cinema, movies, TV shows, anime, documentaries, actors, genres, and movie trivia.
 
 **CRITICAL INSTRUCTION:** Your response format depends entirely on the user's query type.
 
@@ -37,17 +37,17 @@ export async function POST(request) {
       },
       history: history,
     })
-    
+
     const response = await chat.sendMessage({ message: query });
 
     let text = response.text;
-    
+
     // Attempt to extract JSON from a markdown code block
     const jsonMatch = text.match(/```json\s*([\s\S]*?)\s*```/);
     if (jsonMatch && jsonMatch[1]) {
       text = jsonMatch[1];
     }
-    
+
     // check if json, and return it
     try {
       const jsonData = JSON.parse(text);
@@ -57,13 +57,13 @@ export async function POST(request) {
     } catch (e) {
       // Not a JSON response, treat as plain text
     }
-    
+
     // return plain text
-    return NextResponse.json({type: "text", data: response.text});
+    return NextResponse.json({ type: "text", data: response.text });
   } catch (err) {
     return NextResponse.json(
-      {error: "API error"},
-      {status: 500}
+      { error: "API error" },
+      { status: 500 }
     )
   }
 }
