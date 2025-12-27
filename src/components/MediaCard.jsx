@@ -95,6 +95,7 @@ export default function MediaCard({
     return () => {
       clearTimeout(timer)
       isActive = false
+      setIsMuted(true) // Set muted true when stop hovering
     }
   }, [isHovering, trailerKey, hasFetched, isMovie, tmdbId, item])
 
