@@ -168,6 +168,7 @@ export default function MediaCard({
     className={`relative aspect-2/3 hover:z-50 ${isHovering && "z-50"}`}
     onMouseEnter={handleMouseEnter}
     onMouseLeave={() => setIsHovering(false)}
+    onBlur={() => setTimeout(() => (setIsHovering(false)), 200)}
   >
     {/* Absolute container - which expands */}
     <div
