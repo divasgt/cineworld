@@ -50,8 +50,8 @@ export default function Header() {
             {/* Links for md screens */}
             <div className="hidden md:flex gap-5 items-center">
               <Link href="/#intro-section" className="hover:text-white transition">Home</Link>
-              <Link href="/#latestMovies" className="hover:text-white transition">Movies</Link>
-              <Link href="/#latestTVShows" className="hover:text-white transition">TV Shows</Link>
+              <Link href="/movie" className="hover:text-white transition">Movies</Link>
+              <Link href="/tv" className="hover:text-white transition">TV Shows</Link>
             </div>
 
             {/* Browse dropdown for md screens */}
@@ -67,8 +67,8 @@ export default function Header() {
 
               <div className={`absolute top-full left-0 mt-2 bg-gray-900/70 backdrop-blur-xl rounded-md shadow-lg w-40 z-10 border border-gray-500/10 overflow-hidden transition-all ${isBrowseOpen ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-95 invisible'}`}>
                 <Link href="/#intro-section" className="block px-4 py-2 text-sm hover:bg-gray-700 hover:text-white" onClick={() => setIsBrowseOpen(false)}>Home</Link>
-                <Link href="/#latestMovies" className="block px-4 py-2 text-sm hover:bg-gray-700 hover:text-white" onClick={() => setIsBrowseOpen(false)}>Movies</Link>
-                <Link href="/#latestTVShows" className="block px-4 py-2 text-sm hover:bg-gray-700 hover:text-white" onClick={() => setIsBrowseOpen(false)}>TV Shows</Link>
+                <Link href="/movie" className="block px-4 py-2 text-sm hover:bg-gray-700 hover:text-white" onClick={() => setIsBrowseOpen(false)}>Movies</Link>
+                <Link href="/tv" className="block px-4 py-2 text-sm hover:bg-gray-700 hover:text-white" onClick={() => setIsBrowseOpen(false)}>TV Shows</Link>
               </div>
             </div>
           </nav>
