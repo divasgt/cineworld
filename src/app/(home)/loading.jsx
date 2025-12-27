@@ -1,5 +1,5 @@
 import { MediaContainer } from "@/components/MediaContainer";
-import MediaCardSkeleton from "@/components/MediaCardSkeleton";
+import MediaCardSkeleton from "@/components/skeletons/MediaCardSkeleton";
 import H2ForSection from "@/components/H2ForSection";
 
 export default function Loading() {
