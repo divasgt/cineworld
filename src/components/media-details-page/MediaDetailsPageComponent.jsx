@@ -14,6 +14,7 @@ import Similars from "./Similars";
 import { MediaContainer } from "../MediaContainer";
 import H2ForSection from "../H2ForSection";
 import ScrollToTop from "@/components/ScrollToTop";
+import MediaDetailsSkeleton from "../skeletons/MediaDetailsSkeleton";
 
 function getAgeRating(detailsData, type) {
   if (type==="movie" && detailsData.release_dates) {
@@ -66,6 +67,9 @@ export default async function MediaDetailsPageComponent({type, id}) {
 
   const trailer = detailsData.videos.results.find(v => v.type==='Trailer' && v.site==='YouTube')
 
+  return (
+    <MediaDetailsSkeleton />
+  )
 
   return (
   <div className="py-5 px-6 md:py-8 md:px-12 lg:py-10 lg:px-24 xl:py-12 xl:px-32 z-0">

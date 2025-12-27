@@ -11,7 +11,7 @@ export default function MediaCardSkeleton({ count = 6, layoutType }) {
       )}
     >
       {/* Placeholder for image */}
-      <div className="w-full aspect-[2/3] bg-gray-600"></div>
+      <div className="w-full aspect-[2/3] bg-gray-700/40"></div>
       {/* Placeholder for text */}
       {/* <div className="p-3">
         <div className="h-4 bg-gray-600 rounded w-3/4 mb-2"></div>
